@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "default_mode": "vh_lite",
+  "modes": {
+    "vh_lite": {
+      "checkpoint_required": true,
+      "decision_contract_required": false,
+      "rollback_replay_required": false,
+      "trajectory_audit_required": false
+    },
+    "vh_recovery": {
+      "checkpoint_required": true,
+      "decision_contract_required": true,
+      "rollback_replay_required": true,
+      "trajectory_audit_required": true
+    },
+    "vh_transfer": {
+      "checkpoint_required": true,
+      "decision_contract_required": true,
+      "rollback_replay_required": true,
+      "trajectory_audit_required": true,
+      "transfer_eval_required": true
+    }
+  },
+  "harness_components": [
+    "task_specification",
+    "context_selection",
+    "tool_access",
+    "project_memory",
+    "task_state",
+    "observability",
+    "failure_attribution",
+    "verification",
+    "permissions",
+    "entropy_auditing",
+    "intervention_recording",
+    "coordination"
+  ],
+  "primary_score_fields": [
+    "task_pass",
+    "allowed_harness_edits_only",
+    "replay_pass",
+    "no_fresh_human_intervention",
+    "trajectory_safety_pass",
+    "episode_complete"
+  ],
+  "intervention_triggers": [
+    "manual command run by user",
+    "manual UI/API validation by user",
+    "post-hoc clarification after wrong implementation",
+    "tests pass but user-visible behavior fails",
+    "agent loops on environment setup",
+    "review reveals missing recurring rule"
+  ]
+}

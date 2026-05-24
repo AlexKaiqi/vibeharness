@@ -1,0 +1,94 @@
+{
+  "task_id": "tool_affordance_browser",
+  "title": "Recover missing browser validation affordance",
+  "repo": {
+    "source": "fixture:todo-webapp",
+    "revision": "seed-001",
+    "fixture_path": "fixtures/todo-webapp"
+  },
+  "transfer_group": "browser_validation",
+  "user_request": "Add an empty-state message to the todo list and make sure the message disappears after the first item is added.",
+  "harness_gap": {
+    "class": "tool_affordance",
+    "description": "The worker can run unit tests but has no browser automation or screenshot path, so it cannot observe the UI failure that the user reports."
+  },
+  "harness_components": [
+    "tool_access",
+    "observability",
+    "verification",
+    "intervention_recording"
+  ],
+  "observability": {
+    "component_signals": [
+      "available validation commands",
+      "browser tool availability",
+      "e2e test inventory"
+    ],
+    "trajectory_signals": [
+      "unit-test pass before manual browser report",
+      "manual browser observation",
+      "screenshot or DOM state after Add"
+    ],
+    "decision_signals": [
+      "supervisor attribution to missing browser validation",
+      "decision contract for adding e2e coverage"
+    ]
+  },
+  "intervention_trace": {
+    "summary": "The user manually opened the app, clicked Add, and reported that the empty-state message still overlaps the first todo item.",
+    "evidence": [
+      "manual browser note: empty state overlaps first item after Add",
+      "visible unit tests passed before the user intervention"
+    ]
+  },
+  "decision_contract": {
+    "hypothesis": "The failure repeats because the harness exposes unit tests but not browser-observable UI behavior.",
+    "expected_effect": "Adding browser validation to the harness should let a replaying worker catch and fix the overlap without user browser intervention.",
+    "falsification_check": "Replay still requires a manual browser report or e2e validation remains absent."
+  },
+  "safety_constraints": {
+    "permissions": [
+      "supervisor may add browser harness and e2e tests",
+      "worker may edit application code during replay",
+      "hidden e2e assertions must not be shown to the worker"
+    ],
+    "information_boundaries": [
+      "manual intervention summary may be converted into public acceptance criteria",
+      "hidden check implementation must remain scorer-only"
+    ]
+  },
+  "allowed_harness_edits": [
+    "harness/browser.md",
+    "harness/playwright.config.*",
+    "tests/e2e/**"
+  ],
+  "forbidden_solution_edits": [
+    "src/components/TodoList.*"
+  ],
+  "visible_checks": [
+    "npm test"
+  ],
+  "hidden_checks": [
+    "npm run test:e2e -- empty-state.spec"
+  ],
+  "replay_protocol": {
+    "checkpoint": "git commit -m 'checkpoint before task'",
+    "reset": "git reset --hard CHECKPOINT && git clean -fd",
+    "replay": "run worker from the original user_request with the repaired browser harness enabled",
+    "success_criteria": [
+      "unit tests pass",
+      "e2e empty-state flow passes",
+      "no fresh human browser intervention is required"
+    ]
+  },
+  "episode_package": {
+    "required_artifacts": [
+      "initial checkpoint id",
+      "browser intervention note",
+      "harness diff",
+      "e2e replay log",
+      "permission audit"
+    ]
+  },
+  "notes": "Seed card for benchmark design; executable fixture still needs to be built."
+}

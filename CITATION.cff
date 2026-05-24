@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use VibeHarness in research, benchmarks, articles, talks, or derivative tools, please cite it."
+title: "VibeHarness"
+abstract: "A portable recovery workflow that turns human interventions in coding-agent sessions into durable, replayable harness improvements."
+authors:
+  - name: "VibeHarness contributors"
+license: "Apache-2.0"
+repository-code: "https://github.com/AlexKaiqi/vibeharness"
+keywords:
+  - "coding agents"
+  - "agent harness"
+  - "AI-assisted software engineering"
+  - "benchmarking"
+  - "human intervention"

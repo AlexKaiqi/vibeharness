@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest an improvement to VibeHarness
+title: "[feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should VibeHarness support?
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Value
+      description: Which repeated intervention or evaluation gap does this reduce?
+    validations:
+      required: true

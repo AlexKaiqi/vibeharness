@@ -1,0 +1,94 @@
+{
+  "task_id": "spec_capture_clarification",
+  "title": "Recover missing acceptance criteria after user clarification",
+  "repo": {
+    "source": "fixture:invoice-cli",
+    "revision": "seed-003",
+    "fixture_path": "fixtures/invoice-cli"
+  },
+  "transfer_group": "acceptance_capture",
+  "user_request": "Make invoice export friendlier for accountants.",
+  "harness_gap": {
+    "class": "spec_capture",
+    "description": "The initial request is intentionally vague; the worker proceeds without converting a user clarification into durable acceptance criteria."
+  },
+  "harness_components": [
+    "task_specification",
+    "project_memory",
+    "verification",
+    "intervention_recording",
+    "entropy_auditing"
+  ],
+  "observability": {
+    "component_signals": [
+      "acceptance criteria artifact inventory",
+      "clarification capture status",
+      "acceptance test inventory"
+    ],
+    "trajectory_signals": [
+      "initial vague request",
+      "user clarification",
+      "first patch changes labels only"
+    ],
+    "decision_signals": [
+      "supervisor attribution to missing spec capture",
+      "decision contract for durable acceptance criteria"
+    ]
+  },
+  "intervention_trace": {
+    "summary": "The user clarified that friendly means CSV columns must be stable, dates must be ISO formatted, and totals must include tax.",
+    "evidence": [
+      "user clarification: stable CSV columns, ISO dates, tax-inclusive totals",
+      "first patch changed labels but did not satisfy accounting import rules"
+    ]
+  },
+  "decision_contract": {
+    "hypothesis": "The worker failed because the harness lacked a durable path for turning clarification into acceptance criteria.",
+    "expected_effect": "Adding acceptance criteria and tests should let a replaying worker implement accounting-friendly export semantics without repeated clarification.",
+    "falsification_check": "Replay asks for the same clarification again or produces label-only changes."
+  },
+  "safety_constraints": {
+    "permissions": [
+      "supervisor may add acceptance criteria and tests",
+      "worker may edit exporter code during replay",
+      "worker must not rewrite unrelated CLI commands"
+    ],
+    "information_boundaries": [
+      "clarification content becomes visible acceptance criteria",
+      "hidden fixture examples remain scorer-only"
+    ]
+  },
+  "allowed_harness_edits": [
+    "harness/acceptance.md",
+    "tests/acceptance/**"
+  ],
+  "forbidden_solution_edits": [
+    "src/exporter.*"
+  ],
+  "visible_checks": [
+    "npm test"
+  ],
+  "hidden_checks": [
+    "npm run test:acceptance -- invoice-export"
+  ],
+  "replay_protocol": {
+    "checkpoint": "git commit -m 'checkpoint before task'",
+    "reset": "git reset --hard CHECKPOINT && git clean -fd",
+    "replay": "run worker from the original user_request with captured acceptance criteria available in the harness",
+    "success_criteria": [
+      "acceptance criteria are represented in a durable harness artifact",
+      "CSV acceptance tests pass",
+      "the final implementation is reached without repeating the clarification"
+    ]
+  },
+  "episode_package": {
+    "required_artifacts": [
+      "initial checkpoint id",
+      "clarification transcript",
+      "acceptance criteria diff",
+      "acceptance replay log",
+      "scope-creep audit"
+    ]
+  },
+  "notes": "Seed card for benchmark design; executable fixture still needs to be built."
+}

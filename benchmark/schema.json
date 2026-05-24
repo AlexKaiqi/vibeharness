@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/vibeharnessbench.schema.json",
+  "title": "VibeHarnessBench Task Manifest",
+  "type": "object",
+  "required": [
+    "task_id",
+    "title",
+    "repo",
+    "transfer_group",
+    "user_request",
+    "harness_gap",
+    "harness_components",
+    "observability",
+    "intervention_trace",
+    "decision_contract",
+    "safety_constraints",
+    "allowed_harness_edits",
+    "visible_checks",
+    "hidden_checks",
+    "replay_protocol",
+    "episode_package"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "repo": {
+      "type": "object",
+      "required": ["source", "revision"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "string"
+        },
+        "fixture_path": {
+          "type": "string"
+        }
+      }
+    },
+    "user_request": {
+      "type": "string",
+      "minLength": 20
+    },
+    "transfer_group": {
+      "type": "string",
+      "minLength": 3
+    },
+    "harness_gap": {
+      "type": "object",
+      "required": ["class", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "class": {
+          "enum": [
+            "environment_bootstrap",
+            "tool_affordance",
+            "verification_blind_spot",
+            "state_drift",
+            "spec_capture",
+            "coordination_breakdown"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "harness_components": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "task_specification",
+          "context_selection",
+          "tool_access",
+          "project_memory",
+          "task_state",
+          "observability",
+          "failure_attribution",
+          "verification",
+          "permissions",
+          "entropy_auditing",
+          "intervention_recording",
+          "coordination"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "observability": {
+      "type": "object",
+      "required": [
+        "component_signals",
+        "trajectory_signals",
+        "decision_signals"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "component_signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "trajectory_signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "decision_signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "intervention_trace": {
+      "type": "object",
+      "required": ["summary", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 20
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "decision_contract": {
+      "type": "object",
+      "required": ["hypothesis", "expected_effect", "falsification_check"],
+      "additionalProperties": false,
+      "properties": {
+        "hypothesis": {
+          "type": "string",
+          "minLength": 20
+        },
+        "expected_effect": {
+          "type": "string",
+          "minLength": 20
+        },
+        "falsification_check": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "safety_constraints": {
+      "type": "object",
+      "required": ["permissions", "information_boundaries"],
+      "additionalProperties": false,
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "information_boundaries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "allowed_harness_edits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "forbidden_solution_edits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "visible_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "hidden_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "replay_protocol": {
+      "type": "object",
+      "required": ["checkpoint", "reset", "replay", "success_criteria"],
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint": {
+          "type": "string"
+        },
+        "reset": {
+          "type": "string"
+        },
+        "replay": {
+          "type": "string"
+        },
+        "success_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "episode_package": {
+      "type": "object",
+      "required": ["required_artifacts"],
+      "additionalProperties": false,
+      "properties": {
+        "required_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "task_id": "tool_affordance_ui_snapshot_fixture",
+  "title": "Recover missing machine-readable UI snapshot validation",
+  "repo": {
+    "source": "fixture:ui_snapshot_tasks",
+    "revision": "seed-005",
+    "fixture_path": "examples/fixtures/ui_snapshot_tasks"
+  },
+  "transfer_group": "ui_observability",
+  "user_request": "Make the empty-state message disappear after the first todo item is rendered.",
+  "harness_gap": {
+    "class": "tool_affordance",
+    "description": "The worker can run render smoke tests but lacks a machine-readable UI snapshot verifier, so the user must manually inspect UI state."
+  },
+  "harness_components": [
+    "tool_access",
+    "observability",
+    "verification",
+    "intervention_recording"
+  ],
+  "observability": {
+    "component_signals": [
+      "available UI verification commands",
+      "snapshot verifier availability",
+      "acceptance test inventory"
+    ],
+    "trajectory_signals": [
+      "visible test only checked rendered HTML",
+      "manual UI inspection",
+      "empty-state behavior after first item"
+    ],
+    "decision_signals": [
+      "supervisor attribution to missing UI observability tool",
+      "decision contract for adding snapshot validation"
+    ]
+  },
+  "intervention_trace": {
+    "summary": "The user manually inspected rendered UI state because the harness had no structured UI snapshot verifier.",
+    "evidence": [
+      "visible smoke test passed",
+      "manual UI note: empty-state behavior needs validation after first item"
+    ]
+  },
+  "decision_contract": {
+    "hypothesis": "The failure repeats because UI state transitions are not visible to the worker as machine-readable evidence.",
+    "expected_effect": "Adding a snapshot verifier should let replay validate empty-state presence and absence without manual inspection.",
+    "falsification_check": "Replay still requires manual UI inspection or cannot detect empty-state presence/absence."
+  },
+  "safety_constraints": {
+    "permissions": [
+      "supervisor may add fixture-scoped snapshot verifier",
+      "worker may render fixture HTML",
+      "worker must not depend on external browsers or remote services"
+    ],
+    "information_boundaries": [
+      "snapshot outputs are visible to worker and supervisor",
+      "hidden scorer implementation remains scorer-only"
+    ]
+  },
+  "allowed_harness_edits": [
+    "harness/snapshot.py",
+    "tests/test_acceptance.py"
+  ],
+  "forbidden_solution_edits": [
+    "app/render.py"
+  ],
+  "visible_checks": [
+    "python3 tests/test_visible.py"
+  ],
+  "hidden_checks": [
+    "python3 tests/test_acceptance.py"
+  ],
+  "replay_protocol": {
+    "checkpoint": "git commit -m 'checkpoint before task'",
+    "reset": "git reset --hard CHECKPOINT && git clean -fd",
+    "replay": "run the original request after keeping the UI snapshot harness repair",
+    "success_criteria": [
+      "visible test passes",
+      "snapshot verifier checks empty state and one-task state",
+      "acceptance test passes",
+      "no manual UI inspection is required"
+    ]
+  },
+  "episode_package": {
+    "required_artifacts": [
+      "initial checkpoint id",
+      "manual UI inspection note",
+      "snapshot harness diff",
+      "acceptance replay log",
+      "permission audit"
+    ]
+  },
+  "notes": "Executable fixture under examples/fixtures/ui_snapshot_tasks."
+}

@@ -1,0 +1,95 @@
+{
+  "task_id": "environment_bootstrap_service",
+  "title": "Recover missing service bootstrap instructions",
+  "repo": {
+    "source": "fixture:notes-api",
+    "revision": "seed-002",
+    "fixture_path": "fixtures/notes-api"
+  },
+  "transfer_group": "service_bootstrap",
+  "user_request": "Add search-by-tag support to the notes API while preserving the existing create and list endpoints.",
+  "harness_gap": {
+    "class": "environment_bootstrap",
+    "description": "Integration tests require a local database service, but the harness exposes only package installation and unit-test commands."
+  },
+  "harness_components": [
+    "tool_access",
+    "task_state",
+    "observability",
+    "verification",
+    "intervention_recording"
+  ],
+  "observability": {
+    "component_signals": [
+      "service dependency declarations",
+      "integration test command inventory",
+      "database bootstrap status"
+    ],
+    "trajectory_signals": [
+      "connection refusal log",
+      "manual docker compose command",
+      "integration test pass after service startup"
+    ],
+    "decision_signals": [
+      "supervisor attribution to missing service bootstrap",
+      "decision contract for adding startup protocol"
+    ]
+  },
+  "intervention_trace": {
+    "summary": "The user noticed repeated connection failures and manually started the database service before tests could run.",
+    "evidence": [
+      "test log: ECONNREFUSED 127.0.0.1:5432",
+      "manual command: docker compose up -d db"
+    ]
+  },
+  "decision_contract": {
+    "hypothesis": "The worker cannot validate the feature because the harness omits the database service required by integration tests.",
+    "expected_effect": "Adding a service bootstrap artifact should make integration validation available during replay without manual startup.",
+    "falsification_check": "Replay still shows connection refusal or needs a manual docker command."
+  },
+  "safety_constraints": {
+    "permissions": [
+      "supervisor may edit service bootstrap files",
+      "worker may run local containerized services",
+      "worker must not access external production databases"
+    ],
+    "information_boundaries": [
+      "service startup logs are visible to supervisor and worker",
+      "hidden integration assertions remain scorer-only"
+    ]
+  },
+  "allowed_harness_edits": [
+    "harness/bootstrap.md",
+    "harness/services.yml",
+    "scripts/dev-up.*"
+  ],
+  "forbidden_solution_edits": [
+    "src/search.*"
+  ],
+  "visible_checks": [
+    "npm run test:unit"
+  ],
+  "hidden_checks": [
+    "npm run test:integration -- tags"
+  ],
+  "replay_protocol": {
+    "checkpoint": "git commit -m 'checkpoint before task'",
+    "reset": "git reset --hard CHECKPOINT && git clean -fd",
+    "replay": "run worker from the original user_request after the supervisor adds service bootstrap to the harness",
+    "success_criteria": [
+      "database starts through harness instructions",
+      "unit and integration tests pass",
+      "no manual service startup is required"
+    ]
+  },
+  "episode_package": {
+    "required_artifacts": [
+      "initial checkpoint id",
+      "connection failure log",
+      "service bootstrap diff",
+      "integration replay log",
+      "permission audit"
+    ]
+  },
+  "notes": "Seed card for benchmark design; executable fixture still needs to be built."
+}

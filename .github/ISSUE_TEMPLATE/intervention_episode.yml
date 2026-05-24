@@ -1,0 +1,47 @@
+name: Intervention episode
+description: Report a user intervention that should become a harness improvement
+title: "[episode]: "
+labels: ["episode", "needs-triage"]
+body:
+  - type: textarea
+    id: request
+    attributes:
+      label: Original request
+      description: What did the user ask the agent to do?
+    validations:
+      required: true
+  - type: textarea
+    id: intervention
+    attributes:
+      label: Intervention
+      description: What did the human have to do or clarify?
+    validations:
+      required: true
+  - type: dropdown
+    id: failure_class
+    attributes:
+      label: Failure class
+      options:
+        - environment_bootstrap
+        - tool_affordance
+        - verification_blind_spot
+        - state_drift
+        - spec_capture
+        - coordination_breakdown
+        - unknown
+    validations:
+      required: true
+  - type: textarea
+    id: expected_harness
+    attributes:
+      label: Candidate harness improvement
+      description: What should the harness learn from this intervention?
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed secrets, private code, customer data, and personal data.
+          required: true

@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Bootstrap local services",
+    "tags": ["harness", "setup"]
+  },
+  {
+    "title": "Write product patch",
+    "tags": ["feature"]
+  },
+  {
+    "title": "Replay from checkpoint",
+    "tags": ["harness", "verification"]
+  }
+]

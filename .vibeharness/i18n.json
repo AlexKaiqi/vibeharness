@@ -1,0 +1,137 @@
+{
+  "canonical_locale": "en",
+  "locales": ["zh-CN"],
+  "files": [
+    {
+      "source": "README.md",
+      "locale": "zh-CN",
+      "target": "README.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Repository landing page."
+    },
+    {
+      "source": "docs/landing_architecture.md",
+      "locale": "zh-CN",
+      "target": "docs/landing_architecture.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Core landing architecture."
+    },
+    {
+      "source": "docs/evaluation.md",
+      "locale": "zh-CN",
+      "target": "docs/evaluation.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Practical evaluation plan."
+    },
+    {
+      "source": "docs/prior_art.md",
+      "locale": "zh-CN",
+      "target": "docs/prior_art.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Prior art and acknowledgements."
+    },
+    {
+      "source": "docs/publication_strategy.md",
+      "locale": "zh-CN",
+      "target": "docs/publication_strategy.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Paper publication threshold."
+    },
+    {
+      "source": "docs/open_source_readiness.md",
+      "locale": "zh-CN",
+      "target": "docs/open_source_readiness.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Open-source release checklist."
+    },
+    {
+      "source": "docs/verification.md",
+      "locale": "zh-CN",
+      "target": "docs/verification.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Validation suite documentation."
+    },
+    {
+      "source": "docs/example_results.md",
+      "locale": "zh-CN",
+      "target": "docs/example_results.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Bundled example evaluation results."
+    },
+    {
+      "source": "docs/licensing.md",
+      "locale": "zh-CN",
+      "target": "docs/licensing.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "License and attribution policy."
+    },
+    {
+      "source": "docs/installation.md",
+      "locale": "zh-CN",
+      "target": "docs/installation.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Installation and CLI guide."
+    },
+    {
+      "source": "ROADMAP.md",
+      "locale": "zh-CN",
+      "target": "ROADMAP.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Project roadmap."
+    },
+    {
+      "source": "CONTRIBUTING.md",
+      "locale": "zh-CN",
+      "target": "CONTRIBUTING.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Contribution guide."
+    },
+    {
+      "source": "docs/agent_adapters.md",
+      "locale": "zh-CN",
+      "target": "docs/agent_adapters.zh-CN.md",
+      "status": "missing",
+      "notes": "Needs Chinese translation after adapter wording stabilizes."
+    },
+    {
+      "source": "docs/framework.md",
+      "locale": "zh-CN",
+      "target": "docs/framework.zh-CN.md",
+      "status": "missing",
+      "notes": "Needs Chinese translation after framework names stabilize."
+    },
+    {
+      "source": "benchmark/README.md",
+      "locale": "zh-CN",
+      "target": "benchmark/README.zh-CN.md",
+      "status": "missing",
+      "notes": "Benchmark spec translation pending."
+    },
+    {
+      "source": "benchmark/metrics.md",
+      "locale": "zh-CN",
+      "target": "benchmark/metrics.zh-CN.md",
+      "status": "missing",
+      "notes": "Metrics translation pending."
+    },
+    {
+      "source": "benchmark/scoring_rubric.md",
+      "locale": "zh-CN",
+      "target": "benchmark/scoring_rubric.zh-CN.md",
+      "status": "missing",
+      "notes": "Scoring rubric translation pending."
+    }
+  ]
+}

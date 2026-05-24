@@ -1,0 +1,95 @@
+{
+  "task_id": "environment_bootstrap_notes_fixture",
+  "title": "Recover missing NOTES_DB bootstrap for notes CLI",
+  "repo": {
+    "source": "fixture:env_bootstrap_notes",
+    "revision": "seed-004",
+    "fixture_path": "examples/fixtures/env_bootstrap_notes"
+  },
+  "transfer_group": "environment_variables",
+  "user_request": "Add tag search support to the notes CLI and verify the harness-tag workflow.",
+  "harness_gap": {
+    "class": "environment_bootstrap",
+    "description": "Acceptance validation requires NOTES_DB, but the harness does not configure it before replay."
+  },
+  "harness_components": [
+    "tool_access",
+    "task_state",
+    "verification",
+    "intervention_recording"
+  ],
+  "observability": {
+    "component_signals": [
+      "environment variable inventory",
+      "bootstrap script availability",
+      "acceptance validation command"
+    ],
+    "trajectory_signals": [
+      "visible test passed with explicit db path",
+      "acceptance test failed without NOTES_DB",
+      "user manually exported NOTES_DB"
+    ],
+    "decision_signals": [
+      "supervisor attribution to missing environment bootstrap",
+      "decision contract for adding bootstrap script"
+    ]
+  },
+  "intervention_trace": {
+    "summary": "The user manually exported NOTES_DB after acceptance validation failed with a missing configuration error.",
+    "evidence": [
+      "stderr: NOTES_DB is not configured",
+      "manual command: export NOTES_DB=.../data/notes.json"
+    ]
+  },
+  "decision_contract": {
+    "hypothesis": "The failure repeats because the harness lacks a durable way to configure NOTES_DB for acceptance validation.",
+    "expected_effect": "Adding harness/bootstrap.sh should let replay configure NOTES_DB without a fresh user command.",
+    "falsification_check": "Replay still fails with missing NOTES_DB or needs manual export."
+  },
+  "safety_constraints": {
+    "permissions": [
+      "supervisor may add fixture-scoped bootstrap files",
+      "worker may read fixture data",
+      "worker must not use production databases or secrets"
+    ],
+    "information_boundaries": [
+      "bootstrap logs are visible to worker and supervisor",
+      "hidden scorer implementation remains scorer-only"
+    ]
+  },
+  "allowed_harness_edits": [
+    "harness/bootstrap.sh",
+    ".env.vibeharness",
+    "tests/test_acceptance.py"
+  ],
+  "forbidden_solution_edits": [
+    "app/notes.py"
+  ],
+  "visible_checks": [
+    "python3 tests/test_visible.py"
+  ],
+  "hidden_checks": [
+    "bash harness/bootstrap.sh && python3 tests/test_acceptance.py"
+  ],
+  "replay_protocol": {
+    "checkpoint": "git commit -m 'checkpoint before task'",
+    "reset": "git reset --hard CHECKPOINT && git clean -fd",
+    "replay": "run the original request after keeping the bootstrap harness repair",
+    "success_criteria": [
+      "visible test passes",
+      "bootstrap writes .env.vibeharness",
+      "acceptance test passes",
+      "no manual NOTES_DB export is required"
+    ]
+  },
+  "episode_package": {
+    "required_artifacts": [
+      "initial checkpoint id",
+      "missing NOTES_DB failure",
+      "bootstrap harness diff",
+      "acceptance replay log",
+      "permission audit"
+    ]
+  },
+  "notes": "Executable fixture under examples/fixtures/env_bootstrap_notes."
+}

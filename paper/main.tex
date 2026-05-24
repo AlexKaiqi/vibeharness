@@ -1,0 +1,318 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{array}
+
+\setlength{\emergencystretch}{3em}
+
+\title{Harnessing the Vibe: Benchmarking Intervention-Driven Harness Recovery for Coding Agents}
+\author{Anonymous Author(s)}
+\date{}
+
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Coding agents increasingly operate as semi-autonomous software engineers, but
+interactive ``vibe coding'' workflows expose a recurring reliability gap: when an
+agent fails, the user often fixes the immediate symptom manually, while the
+underlying harness limitation remains unmodeled and the final result is not
+replayed from a clean state. We argue that such episodes are not merely task
+failures; they are intervention-triggered harness failures. This paper proposes
+VibeHarness, a supervisor-worker protocol that checkpoints the repository,
+delegates implementation to worker agents, observes intervention evidence,
+writes a falsifiable decision contract, patches the harness, rolls back, and
+replays the task until both the application change and the harness repair are
+verified. We also introduce VibeHarnessBench, a benchmark design for evaluating
+whether coding-agent systems can convert human interventions into durable,
+replayable harness improvements. The benchmark scores task success,
+intervention absorption, attribution accuracy, regression-free replay,
+trajectory safety, episode completeness, and transfer of harness fixes across
+related tasks.
+\todo{Replace this abstract with empirical results after running the benchmark.}
+\end{abstract}
+
+\section{Introduction}
+
+Repository-level coding agents are commonly evaluated by whether their final
+patch passes tests. This view misses a failure mode that is common in real
+interactive usage. A user asks for a feature, the agent gets stuck, the user
+manually starts a service, opens a browser, clarifies acceptance criteria, or
+points out a missed regression, and the agent eventually completes the task. The
+session may look successful, but the system has learned nothing durable: the next
+task can fail in the same way, and the final state may never be verified from a
+clean checkpoint.
+
+We study the hypothesis that many apparent coding-agent failures are recoverable
+harness failures. A harness is the executable environment around the model:
+prompts, tools, setup scripts, memories, review procedures, validation commands,
+and coordination protocols. Recent work has recognized harnesses as central to
+agent performance, but interactive user interventions remain under-specified as
+an evaluation signal. We focus on the moment when a human intervention reveals a
+missing harness capability.
+
+The intended contribution of this work is threefold:
+
+\begin{enumerate}[leftmargin=*]
+  \item a taxonomy of intervention-triggered harness failures in vibe coding;
+  \item VibeHarnessBench, a replay-based benchmark for harness recovery;
+  \item VibeHarness, a supervisor-worker protocol that repairs the harness,
+  rolls back, and validates the task from the original checkpoint;
+  \item an episode-package scoring model that audits not only final patch
+  success but also attribution, permissions, information flow, and transfer.
+\end{enumerate}
+
+\section{Motivating Example}
+
+Consider a web application task: ``Add an empty-state message to the todo list.''
+The worker edits the component and passes unit tests. The user opens the app and
+reports that the empty-state message overlaps the first todo item after clicking
+Add. The immediate problem is a UI bug, but the deeper failure is that the
+harness gave the agent no browser validation affordance. A robust workflow should
+not simply patch the component after the user report. It should add or repair the
+browser-testing harness, roll back to the checkpoint before the task, and replay
+the original request to verify that the same user intervention is no longer
+needed.
+
+\section{Related Work}
+
+\paragraph{Software-engineering agent benchmarks.}
+SWE-bench introduced repository-level issue resolution from real GitHub
+issues~\cite{jimenez2024swebench}. SWE-bench Verified attempted to curate a more
+reliable subset, but later analysis reported test-quality and contamination
+problems severe enough that OpenAI recommended moving beyond it for frontier
+coding evaluation~\cite{openai2026swebenchverified}. PatchDiff further showed
+that patches counted as solved can still diverge behaviorally from developer
+expectations~\cite{wang2025solved}. These findings motivate evaluation beyond a
+single final pass/fail signal.
+
+\paragraph{Vibe-coding benchmarks.}
+FeatBench evaluates feature-level coding from natural language requirements and
+finds that agents often make aggressive changes that cause regressions
+\cite{chen2025featbench}. SUSVIBES studies security vulnerabilities in
+agent-generated feature implementations~\cite{zhao2025susvibes}.
+SWE-WebDevBench evaluates AI app builders as virtual software agencies and
+reports gaps in specification handling, engineering quality, and production
+readiness~\cite{saxena2026swewebdevbench}. Vibe Code Bench evaluates
+end-to-end web application development with browser-based workflows and
+human-aligned evaluators~\cite{tran2026vibecodebench}. These benchmarks
+strengthen the case for realistic interaction-level evaluation, but they do not
+directly score whether user interventions become durable harness improvements.
+
+\paragraph{Harness engineering.}
+OpenAI's harness-engineering report describes workflows where Codex agents use
+standard development tools, browser automation, observability, review agents, and
+repository-readable artifacts to complete product work~\cite{openai2026harness}.
+Agentic Harness Engineering proposes observability-driven automatic evolution of
+coding-agent harnesses and reports gains on Terminal-Bench and SWE-bench
+Verified~\cite{lin2026ahe}. Code as Agent Harness surveys the broader shift
+toward executable, verifiable, stateful agent systems~\cite{ning2026codeharness}.
+AgentFlow synthesizes multi-agent harnesses for vulnerability discovery using a
+typed graph DSL and diagnostic feedback~\cite{liu2026agentflow}. Our focus is
+narrower: the supervised recovery loop triggered by user intervention in
+interactive coding tasks.
+
+AI Harness Engineering formalizes a runtime substrate with responsibilities such
+as task specification, context selection, tool access, memory, task state,
+observability, failure attribution, verification, permissions, entropy auditing,
+and intervention recording~\cite{zhong2026aiharness}. HarnessAudit shows why
+output-level evaluation is insufficient: a harness may produce a correct final
+answer while violating permission or information-flow constraints during the
+trajectory~\cite{liu2026harnessaudit}. VibeHarness adopts these insights by
+requiring episode packages and trajectory audits.
+
+Natural-Language Agent Harnesses further argues that reusable harness policy can
+be made executable and inspectable as natural-language artifacts
+\cite{pan2026nlah}. This supports VibeHarness's repository-readable contracts
+and adapter files.
+
+\paragraph{Agent-system maintenance.}
+AgentIssue-Bench studies whether agents can fix issues in agent systems and
+shows low resolution rates, indicating that agent infrastructure itself is a hard
+maintenance target~\cite{rahardja2025agentissues}. VibeHarnessBench differs by
+scoring whether an intervention trace is converted into a replayable harness
+repair, rather than only whether an agent-system bug is fixed.
+
+\paragraph{Recovery and optimization.}
+Wink studies production coding-agent misbehaviors and lightweight
+self-intervention, reporting reductions in engineer interventions and tool-call
+failures~\cite{nanda2026wink}. VeRO introduces versioning, rewards,
+observations, and structured traces for agents that optimize other agents
+\cite{ursekar2026vero}. VibeHarness is closest to this line of work, but it
+focuses on converting explicit user interventions into durable harness artifacts
+and requiring replay from the original checkpoint.
+
+\section{VibeHarness Protocol}
+
+VibeHarness separates task implementation from harness recovery.
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Checkpoint.} Before task execution, commit or otherwise snapshot
+  the repository, dependencies, and harness state.
+  \item \textbf{Delegate.} A supervisor gives the original user request to one or
+  more worker agents.
+  \item \textbf{Observe.} The supervisor records failures, tool traces, user
+  interventions, validation gaps, permission events, and state transitions.
+  \item \textbf{Attribute.} The supervisor classifies the failure as a task bug
+  or harness gap and localizes it to runtime components such as tool access,
+  task specification, observability, verification, or coordination.
+  \item \textbf{Contract.} Before editing the harness, the supervisor writes a
+  decision contract: the hypothesized cause, intended harness edit, expected
+  effect, and falsification check.
+  \item \textbf{Repair harness.} If the problem is a harness gap, the supervisor
+  changes only allowed harness artifacts such as bootstrap scripts, tool
+  instructions, tests, memories, or review protocols.
+  \item \textbf{Rollback.} The repository returns to the pre-task checkpoint,
+  retaining only the repaired harness where permitted.
+  \item \textbf{Replay and verify.} The worker reruns the original task. The run
+  succeeds only if hidden task checks and harness replay checks pass without new
+  human intervention.
+  \item \textbf{Audit.} The run produces an episode package containing the
+  checkpoint id, harness version, role graph, intervention trace, attribution,
+  decision contract, harness diff, replay proof, and permission audit.
+\end{enumerate}
+
+\section{Design Principles}
+
+Table~\ref{tab:adopted-principles} summarizes how VibeHarness absorbs the most
+solid parts of prior work while preserving a narrower contribution.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.31\linewidth}>{\raggedright\arraybackslash}p{0.34\linewidth}}
+\toprule
+Prior work & Solid idea adopted & VibeHarness adaptation \\
+\midrule
+Agentic Harness Engineering & Component, experience, and decision
+observability; edits as falsifiable contracts & Every harness edit names the
+component, evidence, prediction, and replay falsifier. \\
+AgentFlow & Typed multi-agent harness graph over roles, tools, channels, and
+coordination & The supervisor-worker-critic-auditor topology is represented as
+a typed graph with declared permissions. \\
+Code as Agent Harness & Code artifacts as executable, inspectable, stateful
+substrate & Bootstrap, browser, acceptance, memory, and review artifacts become
+versioned harness code. \\
+OpenAI Codex harness report & Make apps, logs, browser behavior, and reviews
+readable to agents & Episode packages include app observations, logs,
+screenshots, review comments, and replay proof. \\
+AI Harness Engineering & Runtime responsibilities for specification, tools,
+state, verification, permissions, entropy, and intervention recording & The
+benchmark schema requires implicated harness components and audit artifacts. \\
+HarnessAudit & Final success can hide trajectory-level violations & VH-score
+requires permission and information-flow compliance. \\
+\bottomrule
+\end{tabular}
+\caption{Prior-work ideas absorbed into the VibeHarness framework.}
+\label{tab:adopted-principles}
+\end{table}
+
+\subsection{Runtime Components}
+
+VibeHarness models a harness as a set of editable runtime components: task
+specification, context selection, tool access, project memory, task state,
+observability, failure attribution, verification, permissions, entropy auditing,
+intervention recording, and coordination. A benchmark task must name which
+components are implicated. This prevents a vague claim such as ``the harness was
+bad'' and supports component-level transfer analysis.
+
+\subsection{Episode Packages}
+
+The episode package is the unit of evidence. It contains the initial checkpoint,
+the harness version, the role graph, tool calls, tool outputs, tests, browser or
+log observations, human interventions, attribution, decision contract, harness
+diff, rollback command, replay result, and trajectory-safety audit. A run that
+passes hidden tests but cannot produce an episode package is scored as
+incomplete.
+
+\section{VibeHarnessBench}
+
+Each benchmark task contains a repository fixture, a natural-language user
+request, a transfer group, a known harness gap, implicated harness components,
+observability requirements, an intervention trace, a decision contract, safety
+constraints, allowed harness edit paths, visible checks, hidden checks, a replay
+protocol, and required episode artifacts. The benchmark targets six failure
+classes: environment bootstrap, tool affordance, verification blind spot, state
+drift, specification capture, and coordination breakdown.
+
+\subsection{Metrics}
+
+The primary metric is VH-score: the fraction of tasks where the final patch
+passes hidden checks, the harness patch is valid, replay from the original
+checkpoint succeeds, no fresh human intervention is required, the trajectory
+respects permissions and information-flow boundaries, and the episode package is
+complete. Diagnostic metrics include task pass rate, harness replay pass rate,
+intervention absorption rate, attribution accuracy, component-localization
+accuracy, regression-free rate, human interrupt count, rollback efficiency,
+decision-contract pass rate, trajectory-safety pass rate, episode completeness,
+and transfer gain.
+
+\subsection{Baselines}
+
+We propose comparing VibeHarness against single-agent execution, single-agent
+retry without harness edits, multi-agent review without harness repair, and a
+supervisor that edits the harness but does not replay from the checkpoint. Two
+additional ablations isolate the framework's stricter claims: a supervisor that
+repairs and replays without decision contracts, and a supervisor that repairs and
+replays without trajectory auditing.
+\todo{Add implementation details and model versions after experiments.}
+
+\section{Experimental Plan}
+
+The initial benchmark should include both synthetic fixtures and real traces.
+Synthetic fixtures provide deterministic scoring for early iteration. Real traces
+should be collected from coding-agent sessions where a user had to manually
+intervene. Each trace should be de-identified, labeled by failure class, and
+converted into an executable fixture with visible and hidden checks.
+
+The key empirical questions are:
+
+\begin{enumerate}[leftmargin=*]
+  \item How often are user interventions attributable to harness gaps rather
+  than application-code difficulty?
+  \item Does checkpointed harness recovery improve final task pass rate compared
+  with retry and review baselines?
+  \item Do harness repairs transfer to held-out tasks in the same failure class?
+  \item What is the cost in tokens, wall-clock time, and rollbacks?
+\end{enumerate}
+
+\section{Threats to Validity}
+
+Harness recovery can overfit to the benchmark if hidden checks are too similar to
+visible intervention evidence. Real traces may leak private project details or
+reflect user behavior that is not representative. Replay success depends on
+deterministic environments, which is difficult for browser and service-heavy
+tasks. The benchmark may also reward excessive harness growth unless entropy
+audits penalize scope creep. Finally, the boundary between task code and harness
+code can be ambiguous; the benchmark must enforce allowed edit scopes and hidden
+information boundaries.
+
+\section{Conclusion}
+
+Vibe coding turns users into informal reliability engineers. When their
+interventions are treated as one-off fixes, agent workflows repeatedly fail in
+the same way. VibeHarness reframes those moments as data for harness recovery:
+observe the intervention, repair the harness, roll back, and replay. The next
+step is empirical: build VibeHarnessBench fixtures, run baselines, and measure
+whether intervention-driven harness repair improves reliability beyond ordinary
+task retries.
+
+\section*{Acknowledgements}
+
+This project builds on recent work in coding-agent benchmarks, harness
+engineering, recovery systems, trajectory audit, and production agent tooling. We
+thank the authors and maintainers of these systems for making the problem
+concrete enough to engineer against. VibeHarness should be read as a narrow
+engineering synthesis around intervention-driven harness recovery, not as a
+claim to have invented harness engineering.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

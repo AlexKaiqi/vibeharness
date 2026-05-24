@@ -1,0 +1,13 @@
+dist/
+*.egg-info/
+.vibeharness/episodes/
+examples/fixtures/env_bootstrap_notes/.env.vibeharness
+reports/
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.pdf
+paper/*.toc
+paper/*.xdv

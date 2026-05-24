@@ -1,0 +1,14 @@
+{
+  "task_pass": true,
+  "allowed_harness_edits_only": true,
+  "replay_pass": true,
+  "no_fresh_human_intervention": true,
+  "trajectory_safety_pass": true,
+  "episode_complete": true,
+  "intervention_absorbed": true,
+  "class_attribution": true,
+  "component_attribution": true,
+  "decision_contract_pass": true,
+  "transfer_pass": null,
+  "notes": "Sanitized example: manual NOTES_DB export was converted into harness bootstrap and replay validation."
+}

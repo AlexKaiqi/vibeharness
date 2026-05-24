@@ -37,7 +37,29 @@ vh validate
 vh init /path/to/target/repo
 ```
 
-详见：[安装](docs/installation.zh-CN.md) 和 [验证](docs/verification.zh-CN.md)。
+详见：[安装](docs/installation.zh-CN.md) 和
+[Runtime 安装矩阵](docs/runtime_install.zh-CN.md)。验证细节见
+[验证](docs/verification.zh-CN.md)。
+
+## Runtime Setup
+
+本地 agent runtime 使用 skill install：
+
+```sh
+./install.sh --codex-only
+./install.sh --claude-only
+```
+
+目标项目中启用 VibeHarness 使用 `vh init`：
+
+```sh
+python3 -m pip install .
+vh init /path/to/project
+```
+
+`vh init` 会写入 Codex、Claude Code、Cursor 和 OpenHands 的原生 adapter
+files。OpenHands 使用 `vh init` 写入的 repository-level microagent，不需要全局
+skill install。
 
 ## 包含内容
 
@@ -58,6 +80,7 @@ vh init /path/to/target/repo
 - `docs/episode_collection.md` / [中文](docs/episode_collection.zh-CN.md)：如何收集、脱敏、评分和划分 episodes。
 - `docs/licensing.md` / [中文](docs/licensing.zh-CN.md)：license 选择、署名期待和复用边界。
 - `docs/installation.md` / [中文](docs/installation.zh-CN.md)：本地 package 使用、editable development install 和 `vh init`。
+- `docs/runtime_install.md` / [中文](docs/runtime_install.zh-CN.md)：Codex、Claude Code、Cursor、OpenHands 和自定义 skills 目录安装方式。
 - `CONTRIBUTING.md`、`SECURITY.md`、`.github/`：社区和贡献文件。
 - `CHANGELOG.md` / [中文](CHANGELOG.zh-CN.md)：当前 release notes 和 known limits。
 - `benchmark/` / [中文](benchmark/README.zh-CN.md)：VibeHarnessBench 的任务格式、指标和 seed task。

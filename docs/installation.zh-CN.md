@@ -7,6 +7,8 @@ VibeHarness 有两条安装路径：
 1. 面向 agent 工作流的 skill-first 安装，不需要 Python package。
 2. 可选的 Python CLI 安装，用于 episode scaffolding、scoring 和 reports。
 
+不同 runtime 的具体安装方式见：[Runtime 安装矩阵](runtime_install.zh-CN.md)。
+
 ## Skill Install
 
 从 checkout 安装：
@@ -40,6 +42,13 @@ Use $vibeharness to run this task as a checkpointed, replayable episode.
 
 兼容 skills 的安装器也可以直接指向 `skills/vibeharness` 目录。如果某个
 runtime 的 skills 目录不同，可以用 `--target`。根目录 `SKILL.md` 会保持同步，以兼容期望 top-level skill entry 的工具。
+
+Runtime notes：
+
+- Codex：用 `./install.sh --codex-only` 安装本地 skill；每个需要启用的项目中再运行 `vh init`，写入 `AGENTS.md` 和 `.vibeharness/`。
+- Claude Code：用 `./install.sh --claude-only` 安装本地 skill；项目中用 `vh init` 写入 `CLAUDE.md` 和 `.claude/commands/`。
+- Cursor：更推荐用 `vh init` 写入 `.cursor/rules/vibeharness.mdc`；只有当你的本地 runtime 支持 skills 目录时，才使用 `--target` 或 `--cursor-only`。
+- OpenHands：用 `vh init` 写入 `.openhands/microagents/vibeharness.md`；不需要全局 skill install 路径。
 
 ## 直接从 Checkout 使用
 

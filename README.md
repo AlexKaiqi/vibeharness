@@ -47,7 +47,28 @@ vh init /path/to/target/repo
 ```
 
 See [Installation](docs/installation.md) and
-[Verification](docs/verification.md) for details.
+[Runtime Install Matrix](docs/runtime_install.md) for runtime-specific setup.
+See [Verification](docs/verification.md) for validation details.
+
+## Runtime Setup
+
+Use the skill install for local agent runtimes:
+
+```sh
+./install.sh --codex-only
+./install.sh --claude-only
+```
+
+Use `vh init` to enable VibeHarness in a target project:
+
+```sh
+python3 -m pip install .
+vh init /path/to/project
+```
+
+`vh init` writes native adapter files for Codex, Claude Code, Cursor, and
+OpenHands. OpenHands uses the repository-level microagent file written by
+`vh init`; it does not need a global skill install.
 
 ## What's Included
 
@@ -78,6 +99,8 @@ This repository contains:
   boundaries.
 - `docs/installation.md`: local package usage, editable development install,
   and `vh init`.
+- `docs/runtime_install.md`: Codex, Claude Code, Cursor, OpenHands, and custom
+  skill-directory setup.
 - `CONTRIBUTING.md`, `SECURITY.md`, `.github/`: community and contribution
   files.
 - `CHANGELOG.md`: current release notes and known limits.

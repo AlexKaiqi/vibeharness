@@ -91,6 +91,14 @@
       "notes": "Installation and CLI guide."
     },
     {
+      "source": "docs/runtime_install.md",
+      "locale": "zh-CN",
+      "target": "docs/runtime_install.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Runtime-specific installation matrix."
+    },
+    {
       "source": "docs/episode_collection.md",
       "locale": "zh-CN",
       "target": "docs/episode_collection.zh-CN.md",

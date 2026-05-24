@@ -5,6 +5,9 @@
 VibeHarness stays portable by using each tool's native instruction/config
 surface instead of building a vendor-specific wrapper.
 
+For user-facing installation commands by runtime, see
+[Runtime Install Matrix](runtime_install.md).
+
 ## Codex
 
 Use `AGENTS.md` for repository instructions and keep VibeHarness commands
@@ -12,6 +15,12 @@ explicit in prompts or task templates. Codex cloud tasks run in sandboxed
 environments and can read, edit, and execute code in repositories. Treat network
 access as a policy decision: Codex documentation describes internet access as
 off by default in cloud tasks, with allowlists available when needed.
+
+Install shape:
+
+- local skill: `./install.sh --codex-only`;
+- project runtime: `vh init /path/to/project`, which writes `AGENTS.md` and
+  `.vibeharness/`.
 
 Useful sources:
 
@@ -31,6 +40,12 @@ Be careful with hooks: Claude Code hook commands execute shell commands
 automatically, so use them for logging or reminders first, and gate anything
 destructive.
 
+Install shape:
+
+- local skill: `./install.sh --claude-only`;
+- project runtime: `vh init /path/to/project`, which writes `CLAUDE.md`,
+  `.claude/commands/`, and `.vibeharness/`.
+
 Useful sources:
 
 - https://docs.anthropic.com/en/docs/claude-code/memory
@@ -43,6 +58,13 @@ Use `.cursor/rules/*.mdc` project rules. Cursor also documents `AGENTS.md` as a
 simple Markdown alternative, while `.cursorrules` is legacy. The VibeHarness rule
 is marked `alwaysApply: true` so the recovery workflow is consistently visible.
 
+Install shape:
+
+- project runtime: `vh init /path/to/project`, which writes
+  `.cursor/rules/vibeharness.mdc`;
+- optional custom skill path: `./install.sh --target /path/to/skills/vibeharness`
+  when your local runtime supports it.
+
 Useful source:
 
 - https://docs.cursor.com/context/rules
@@ -52,6 +74,12 @@ Useful source:
 Use `.openhands/microagents/*.md` for repository-specific guidance. For real
 projects, add `.openhands/setup.sh` only when you need deterministic dependency
 bootstrap; keep it minimal and idempotent.
+
+Install shape:
+
+- project runtime: `vh init /path/to/project`, which writes
+  `.openhands/microagents/vibeharness.md`;
+- no global skill install path is required.
 
 Useful sources:
 

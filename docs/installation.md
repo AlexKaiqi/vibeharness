@@ -7,6 +7,9 @@ VibeHarness has two installation paths:
 1. Skill-first install for agent workflows, with no Python package required.
 2. Optional Python CLI install for episode scaffolding, scoring, and reports.
 
+For runtime-specific setup, see
+[Runtime Install Matrix](runtime_install.md).
+
 ## Skill Install
 
 From a checkout:
@@ -41,6 +44,18 @@ Use $vibeharness to run this task as a checkpointed, replayable episode.
 Skills-compatible installers can also target the `skills/vibeharness` folder
 directly. Use `--target` when a runtime has a different skills directory. The
 root `SKILL.md` is kept in sync for tools that expect a top-level skill entry.
+
+Runtime notes:
+
+- Codex: use `./install.sh --codex-only` for the local skill, and `vh init` in
+  each project that should carry `AGENTS.md` and `.vibeharness/`.
+- Claude Code: use `./install.sh --claude-only` for the local skill, and
+  `vh init` for `CLAUDE.md` plus `.claude/commands/`.
+- Cursor: prefer `vh init` for `.cursor/rules/vibeharness.mdc`; use
+  `--target` or `--cursor-only` only when your local runtime supports a skills
+  directory.
+- OpenHands: use `vh init` for `.openhands/microagents/vibeharness.md`; there
+  is no global skill install path required.
 
 ## From Checkout
 

@@ -11,6 +11,8 @@ All notable changes to VibeHarness are documented here.
 - Skill-first distribution via root `SKILL.md`, `skills/vibeharness/`, and
   `install.sh`, so Codex, Claude Code, and custom skill-directory users can
   install the workflow without installing the Python package.
+- Runtime-specific installation documentation now covers Codex, Claude Code,
+  Cursor, OpenHands, and custom skill directories.
 
 ### Validation
 

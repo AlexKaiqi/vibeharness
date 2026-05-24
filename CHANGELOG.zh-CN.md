@@ -10,6 +10,8 @@
 
 - 新增 skill-first 分发：根目录 `SKILL.md`、`skills/vibeharness/` 和
   `install.sh`，让 Codex、Claude Code 和自定义 skills 目录用户无需安装 Python package 也能使用工作流。
+- 新增 runtime-specific 安装文档，覆盖 Codex、Claude Code、Cursor、
+  OpenHands 和自定义 skill 目录。
 
 ### Validation
 

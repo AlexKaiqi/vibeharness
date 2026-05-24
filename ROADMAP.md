@@ -14,15 +14,18 @@
 - Add a third recovery-class fixture. Done.
 - Add local example evaluation report. Done.
 - Add package installation path. Done.
-- Finish high-priority Chinese translations.
+- Add ablation and episode-set scoring. Done.
+- Finish high-priority Chinese translations. Done.
+- Add release notes and release process. Done.
 
 ## v0.2: Recovery Loop
 
 - Add helpers for recording interventions.
-- Add harness-diff classification.
+- Add harness-diff classification and reporting.
 - Add rollback/replay helper commands.
 - Add trajectory audit checks.
 - Add adapter-specific quick starts.
+- Collect the first sanitized real episodes.
 
 ## v0.3: Evaluation Pack
 

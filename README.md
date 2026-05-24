@@ -32,6 +32,7 @@ This repository contains:
 - `docs/publication_strategy.md`: when the project is worth publishing as a
   paper.
 - `docs/open_source_readiness.md`: checklist for public open-source release.
+- `docs/release_process.md`: lightweight release and tagging process.
 - `docs/verification.md`: what `make validate` checks and what it does not
   prove.
 - `docs/example_results.md`: current bundled example evaluation results.
@@ -43,6 +44,7 @@ This repository contains:
   and `vh init`.
 - `CONTRIBUTING.md`, `SECURITY.md`, `.github/`: community and contribution
   files.
+- `CHANGELOG.md`: current release notes and known limits.
 - `paper/`: a first paper draft and references.
 - `benchmark/`: the proposed VibeHarnessBench task format, metrics, and seed
   task cards.
@@ -127,6 +129,7 @@ Or install the local CLI:
 
 ```sh
 python3 -m pip install .
+vh version
 vh validate
 vh ablation
 vh episodes examples/episodes

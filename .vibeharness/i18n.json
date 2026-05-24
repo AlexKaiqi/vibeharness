@@ -11,6 +11,14 @@
       "notes": "Repository landing page."
     },
     {
+      "source": "CHANGELOG.md",
+      "locale": "zh-CN",
+      "target": "CHANGELOG.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Release changelog."
+    },
+    {
       "source": "docs/landing_architecture.md",
       "locale": "zh-CN",
       "target": "docs/landing_architecture.zh-CN.md",
@@ -89,6 +97,14 @@
       "status": "current",
       "reviewed_at": "2026-05-24",
       "notes": "Episode dataset collection and sanitization guide."
+    },
+    {
+      "source": "docs/release_process.md",
+      "locale": "zh-CN",
+      "target": "docs/release_process.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Release process."
     },
     {
       "source": "ROADMAP.md",

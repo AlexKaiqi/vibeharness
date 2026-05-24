@@ -28,6 +28,7 @@
 - 用于验证 collected episode directories 的 episode-set scorer；
 - 可本地安装的 CLI package，并包含 packaged `vh init` templates；
 - 高优先级 docs 和 benchmark pages 的中文翻译已补齐。
+- workflow preview 的 release notes 和 release process docs。
 
 还不够支撑成熟发布的部分：
 
@@ -38,7 +39,7 @@
 
 - 来自多个 agent tools 的真实脱敏 episodes；
 - 至少一个 transfer group 的 multi-repository evaluation；
-- release notes 和 version tag。
+- final release review 之后的 version tag。
 
 ## License 建议
 

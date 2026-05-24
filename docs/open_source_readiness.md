@@ -28,6 +28,7 @@ Ready enough for an early open-source release:
 - episode-set scorer for validating collected episode directories;
 - installable local CLI package with packaged `vh init` templates;
 - current Chinese translations for the high-priority docs and benchmark pages.
+- release notes and release process docs for the workflow preview.
 
 Not ready for a polished release:
 
@@ -38,7 +39,7 @@ Not ready for a polished release:
 
 - real sanitized episodes from multiple agent tools;
 - multi-repository evaluation with at least one transfer group;
-- release notes and version tag.
+- version tag after final release review.
 
 ## License Recommendation
 

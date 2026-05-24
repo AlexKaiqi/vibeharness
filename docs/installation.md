@@ -19,6 +19,7 @@ extra.
 
 ```sh
 python3 -m pip install .
+vh version
 vh validate
 vh report
 ```
@@ -66,6 +67,7 @@ vh init /path/to/target/repo --force
 
 ```sh
 vh start --request "implement the user request"
+vh version
 vh score .vibeharness/episodes/<id>
 vh episodes .vibeharness/episodes
 vh validate

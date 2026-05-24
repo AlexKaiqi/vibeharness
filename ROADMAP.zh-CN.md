@@ -14,15 +14,18 @@
 - 添加第三个 recovery-class fixture。已完成。
 - 添加本地 example evaluation report。已完成。
 - 添加 package installation path。已完成。
-- 完成高优先级中文翻译。
+- 添加 ablation 和 episode-set scoring。已完成。
+- 完成高优先级中文翻译。已完成。
+- 添加 release notes 和 release process。已完成。
 
 ## v0.2: Recovery Loop
 
 - 添加记录 interventions 的辅助工具。
-- 添加 harness-diff classification。
+- 添加 harness-diff classification 和 reporting。
 - 添加 rollback/replay helper commands。
 - 添加 trajectory audit checks。
 - 添加各 adapter 的 quick start。
+- 收集第一批脱敏真实 episodes。
 
 ## v0.3: Evaluation Pack
 

@@ -10,6 +10,7 @@ from importlib.resources import files
 from pathlib import Path
 from typing import Any, List, Optional
 
+from . import __version__
 from .ablation import run_ablation
 from .benchmark import validate_manifests
 from .episode import create_episode, score_episode, score_episode_set
@@ -52,6 +53,11 @@ def cmd_init(args: argparse.Namespace) -> int:
         src = source_root.joinpath(rel)
         if src.is_dir() or src.is_file():
             copy_path(src, target / rel, args.force)
+    return 0
+
+
+def cmd_version(args: argparse.Namespace) -> int:
+    print(__version__)
     return 0
 
 
@@ -143,6 +149,9 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("path", nargs="?", default=".")
     init.add_argument("--force", action="store_true")
     init.set_defaults(func=cmd_init)
+
+    version = subparsers.add_parser("version", help="Print VibeHarness version")
+    version.set_defaults(func=cmd_version)
 
     start = subparsers.add_parser("start", help="Create an episode")
     start.add_argument("--request", required=True)

@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import List
 
 from .ablation import run_ablation
+from .agent_adapters import check_agent_adapters
 from .benchmark import validate_manifests
 from .codex_adapter import check_codex_adapter
 from .episode import score_episode_set
@@ -84,6 +85,15 @@ def validate_repo(root: Path) -> bool:
         ok = False
     else:
         print(f"Checked {codex_count} Codex adapter invariant(s).")
+
+    print("==> agent adapter surfaces", flush=True)
+    adapter_errors, adapter_count = check_agent_adapters(root)
+    if adapter_errors:
+        print("Agent adapter errors:")
+        print("\n".join(f"- {error}" for error in adapter_errors))
+        ok = False
+    else:
+        print(f"Checked {adapter_count} agent adapter invariant(s).")
 
     print("==> todo fixture visible test", flush=True)
     if not run_fixture(["python3", "tests/test_visible.py"], root / "examples" / "fixtures" / "todo_cli"):

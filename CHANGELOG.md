@@ -20,6 +20,9 @@ All notable changes to VibeHarness are documented here.
 - `make validate` now runs a Codex adapter smoke test that initializes a
   temporary target repository, verifies `AGENTS.md`, creates an episode, and
   scores it without relying on repository-local helper scripts.
+- `make validate` now checks Codex, Claude Code, Cursor, and OpenHands adapter
+  surfaces against the same lightweight method contract and verifies their
+  `vh init` output.
 
 ## 0.1.0 - 2026-05-24
 

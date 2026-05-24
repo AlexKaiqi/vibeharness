@@ -33,6 +33,8 @@ This runs:
 - skill distribution and install smoke testing;
 - Codex adapter smoke testing through `AGENTS.md`, `vh init`, episode creation,
   and scoring in a temporary git repository;
+- adapter surface checks for Codex, Claude Code, Cursor, and OpenHands,
+  including `vh init` output in a temporary target repository;
 - executable fixture tests;
 - sanitized example episode scoring;
 - bundled episode-set scoring;
@@ -121,6 +123,8 @@ normal contributors.
   directories;
 - the Codex adapter can bootstrap a target repository, create an episode, and
   score it without relying on repository-local helper scripts;
+- all supported adapters expose the same lightweight method contract without
+  hard-coding this repository's helper scripts into initialized target repos;
 - the executable fixture still works;
 - the bundled example episodes have passing primary scores;
 - the bundled examples can produce an evaluation report;

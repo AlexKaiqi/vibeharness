@@ -6,7 +6,7 @@ import os
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 
 DISALLOWED_SKILL_DOCS = {
@@ -17,7 +17,7 @@ DISALLOWED_SKILL_DOCS = {
 }
 
 
-def _has_frontmatter_field(text: str, field: str, expected_prefix: str | None = None) -> bool:
+def _has_frontmatter_field(text: str, field: str, expected_prefix: Optional[str] = None) -> bool:
     if not text.startswith("---\n"):
         return False
     end = text.find("\n---\n", 4)

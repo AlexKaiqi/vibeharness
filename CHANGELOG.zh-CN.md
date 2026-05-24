@@ -18,6 +18,8 @@
 - `make validate` 现在会运行 Codex adapter smoke test：初始化临时目标仓库、
   验证 `AGENTS.md`、创建 episode，并在不依赖 repository-local helper scripts
   的情况下完成 scoring。
+- `make validate` 现在会按同一套轻量 method contract 检查 Codex、Claude
+  Code、Cursor 和 OpenHands adapter surfaces，并验证它们的 `vh init` output。
 
 ## 0.1.0 - 2026-05-24
 

@@ -6,24 +6,25 @@ VibeHarness is an intervention-driven harness recovery loop for coding agents.
 It treats a user intervention as a structured signal about the model-harness-
 environment system, not as an isolated hint for the current patch.
 
-## Design Principles Absorbed from Prior Work
+## Related Evaluation Checks
 
-VibeHarness intentionally borrows the strongest parts of recent harness work:
+The framework uses the following related-work themes as evaluation checks. These
+are not direct implementation dependencies:
 
-- From Agentic Harness Engineering: every editable harness component should be
+- Agentic harness engineering: every editable harness component should be
   explicit, revertible, and linked to a falsifiable prediction.
-- From AgentFlow: multi-agent orchestration should be represented as a typed
+- AgentFlow-style orchestration: multi-agent orchestration should be represented as a typed
   graph of roles, tools, message channels, and coordination protocols.
-- From Code as Agent Harness: harness artifacts should be executable,
+- Code-as-harness framing: harness artifacts should be executable,
   inspectable, stateful, and usable by agents as first-class project substrate.
-- From OpenAI's Codex harness report: app state, browser behavior, logs,
+- Codex harness-engineering practice: app state, browser behavior, logs,
   metrics, and review feedback should be made directly readable to agents.
-- From AI Harness Engineering: harnesses should cover task specification,
+- Runtime-substrate framing: harnesses should cover task specification,
   context selection, tool access, memory, task state, observability, attribution,
   verification, permissions, entropy auditing, and intervention recording.
-- From HarnessAudit: final task success is insufficient; full trajectories must
+- Trajectory audit framing: final task success is insufficient; full trajectories must
   respect permissions, information boundaries, and execution fidelity.
-- From SWE-bench critiques: hidden checks must avoid narrow/wide-test traps, and
+- Benchmark critique framing: hidden checks must avoid narrow/wide-test traps, and
   benchmark tasks need replayability, contamination awareness, and behavioral
   validation beyond a single patch pass.
 

@@ -47,8 +47,7 @@ This repository contains:
   task cards.
 - `benchmark/metrics.md` and `benchmark/scoring_rubric.md`: binary primary
   score and diagnostic subscore definitions.
-- `docs/framework.md`: the current framework design, including the parts
-  absorbed from recent harness-engineering papers.
+- `docs/framework.md`: the current framework design and evaluation checks.
 - `vibeharness/`, `vibeharness/assets/`, and `pyproject.toml`: local CLI
   package and packaged `vh init` templates.
 - `scripts/`: lightweight utilities for validating benchmark manifests.
@@ -74,8 +73,8 @@ claims require sanitized real episodes, baselines, and transfer evaluation.
 
 ## Prior Art
 
-VibeHarness builds on recent harness-engineering, agent-recovery, benchmark, and
-trajectory-audit work. See [Prior Art and Acknowledgements](docs/prior_art.md).
+Related work and acknowledgements are collected in
+[Prior Art and Acknowledgements](docs/prior_art.md).
 
 ## Open Source
 

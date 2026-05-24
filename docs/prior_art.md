@@ -2,9 +2,10 @@
 
 [English](prior_art.md) | [简体中文](prior_art.zh-CN.md)
 
-VibeHarness builds on coding-agent benchmarks, agent harness engineering,
-recovery systems, audit work, and production agent tools. This page records that
-lineage and keeps the project grounded in prior work.
+This page collects related work and acknowledgements. VibeHarness does not
+directly reuse the methods, code, or benchmark data from these papers unless a
+specific source is named near the relevant concept. The references below are
+included to respect neighboring work and to make the project context clear.
 
 ## What VibeHarness Adds
 
@@ -21,7 +22,7 @@ The distinctive value is narrow:
 - It provides thin adapters for existing tools instead of replacing Codex,
   Claude Code, Cursor, OpenHands, or other coding agents.
 
-## Work We Build On
+## Related Work We Acknowledge
 
 ### Harness Engineering
 
@@ -85,7 +86,7 @@ session ends.
 
 ## Citation Policy
 
-When VibeHarness borrows a concept, the documentation should name the source
-near the concept, not only in a bibliography. Research-facing artifacts should
-also cite the source formally. Product-facing artifacts should include this page
-so users can see the lineage without reading the paper draft.
+When VibeHarness directly uses a concept, method, dataset, or implementation
+from another work, the documentation should name the source near that use, not
+only in a bibliography. Product-facing artifacts can link to this page as a
+compact acknowledgement list.

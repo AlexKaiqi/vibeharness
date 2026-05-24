@@ -4,17 +4,17 @@
 
 VibeHarness 是一个 intervention-driven harness recovery loop，面向 coding agents。它把用户介入视为关于 model-harness-environment system 的结构化信号，而不是当前 patch 的一次孤立提示。
 
-## 从已有工作中吸收的设计原则
+## 相关评估检查
 
-VibeHarness 有意吸收近期 harness 工作中最扎实的部分：
+framework 把以下相关工作主题作为 evaluation checks。它们不是直接 implementation dependencies：
 
-- 来自 Agentic Harness Engineering：每个可编辑 harness component 都应显式、可回滚，并关联到可证伪预测。
-- 来自 AgentFlow：multi-agent orchestration 应表示为 roles、tools、message channels 和 coordination protocols 的 typed graph。
-- 来自 Code as Agent Harness：harness artifacts 应可执行、可检查、有状态，并能作为 agent 的一等 project substrate。
-- 来自 OpenAI 的 Codex harness report：app state、browser behavior、logs、metrics 和 review feedback 应能被 agent 直接读取。
-- 来自 AI Harness Engineering：harness 应覆盖 task specification、context selection、tool access、memory、task state、observability、attribution、verification、permissions、entropy auditing 和 intervention recording。
-- 来自 HarnessAudit：最终 task success 不够；完整 trajectories 必须尊重 permissions、information boundaries 和 execution fidelity。
-- 来自 SWE-bench critiques：hidden checks 必须避免 narrow/wide-test traps，benchmark tasks 需要 replayability、contamination awareness，以及超越单次 patch pass 的 behavioral validation。
+- Agentic harness engineering：每个可编辑 harness component 都应显式、可回滚，并关联到可证伪预测。
+- AgentFlow-style orchestration：multi-agent orchestration 应表示为 roles、tools、message channels 和 coordination protocols 的 typed graph。
+- Code-as-harness framing：harness artifacts 应可执行、可检查、有状态，并能作为 agent 的一等 project substrate。
+- Codex harness-engineering practice：app state、browser behavior、logs、metrics 和 review feedback 应能被 agent 直接读取。
+- Runtime-substrate framing：harness 应覆盖 task specification、context selection、tool access、memory、task state、observability、attribution、verification、permissions、entropy auditing 和 intervention recording。
+- Trajectory audit framing：最终 task success 不够；完整 trajectories 必须尊重 permissions、information boundaries 和 execution fidelity。
+- Benchmark critique framing：hidden checks 必须避免 narrow/wide-test traps，benchmark tasks 需要 replayability、contamination awareness，以及超越单次 patch pass 的 behavioral validation。
 
 ## Core Loop
 

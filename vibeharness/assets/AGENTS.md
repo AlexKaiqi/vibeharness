@@ -7,8 +7,9 @@ Use this repository as a VibeHarness-enabled workspace.
 For non-trivial implementation, debugging, or evaluation tasks:
 
 1. Inspect `git status --short` and identify unrelated user changes.
-2. Create an episode with:
-   `python3 scripts/vh_start.py --request "<user request>"`
+2. Create an episode with the first available command:
+   - `vh start --request "<user request>"`
+   - `python3 -m vibeharness.cli start --request "<user request>"`
 3. Treat the generated episode directory as the run log.
 4. Implement the task using the repository's normal commands.
 5. Record tests, interventions, and final scorecard in the episode.
@@ -27,7 +28,8 @@ Instead:
 4. edit only allowed harness artifacts;
 5. roll product code back to the checkpoint when recovery mode is required;
 6. replay the original request;
-7. fill `scorecard.json` and run `python3 scripts/vh_score_episode.py <episode>`.
+7. fill `scorecard.json` and score with `vh score <episode>` or
+   `python3 -m vibeharness.cli score <episode>`.
 
 ## Harness vs Product Code
 

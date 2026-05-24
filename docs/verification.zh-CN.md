@@ -28,6 +28,9 @@ python3 -m vibeharness.cli validate
 - i18n status validation；
 - 本地 Markdown link checking；
 - packaged `vh init` asset sync checking；
+- skill distribution 和 install smoke testing；
+- Codex adapter smoke testing：在临时 git repository 中通过 `AGENTS.md`、
+  `vh init`、episode creation 和 scoring 验证；
 - executable fixture tests；
 - 脱敏 example episode scoring；
 - bundled episode-set scoring；
@@ -109,6 +112,8 @@ make paper
 - 双语文档状态被追踪；
 - 仓库内 Markdown 链接可解析；
 - packaged `vh init` templates 与 source files 保持一致；
+- skill-first install 路径可以写入本地 Codex/Claude-style skills 目录；
+- Codex adapter 可以 bootstrap 目标仓库、创建 episode 并完成 scoring，且不依赖 repository-local helper scripts；
 - executable fixture 仍然可运行；
 - 内置 example episodes 的 primary scores 通过；
 - 内置 examples 能生成 evaluation report；

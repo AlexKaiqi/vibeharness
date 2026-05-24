@@ -30,6 +30,9 @@ This runs:
 - i18n status validation;
 - local Markdown link checking;
 - packaged `vh init` asset sync checking;
+- skill distribution and install smoke testing;
+- Codex adapter smoke testing through `AGENTS.md`, `vh init`, episode creation,
+  and scoring in a temporary git repository;
 - executable fixture tests;
 - sanitized example episode scoring;
 - bundled episode-set scoring;
@@ -114,6 +117,10 @@ normal contributors.
 - bilingual documentation status is tracked;
 - repository-local documentation links resolve;
 - packaged `vh init` templates match their source files;
+- the skill-first install path can populate local Codex/Claude-style skill
+  directories;
+- the Codex adapter can bootstrap a target repository, create an episode, and
+  score it without relying on repository-local helper scripts;
 - the executable fixture still works;
 - the bundled example episodes have passing primary scores;
 - the bundled examples can produce an evaluation report;

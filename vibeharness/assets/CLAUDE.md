@@ -8,8 +8,11 @@ improvements.
 For non-trivial tasks, run:
 
 ```sh
-python3 scripts/vh_start.py --request "$USER_REQUEST"
+vh start --request "$USER_REQUEST"
 ```
+
+If `vh` is not installed but this checkout is available, use
+`python3 -m vibeharness.cli start --request "$USER_REQUEST"`.
 
 Use the created `.vibeharness/episodes/...` directory as the task notebook.
 

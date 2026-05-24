@@ -3,8 +3,11 @@ Audit and score a VibeHarness episode.
 Run:
 
 ```sh
-python3 scripts/vh_score_episode.py "$ARGUMENTS"
+vh score "$ARGUMENTS"
 ```
+
+If `vh` is unavailable in this checkout, run
+`python3 -m vibeharness.cli score "$ARGUMENTS"`.
 
 Then inspect missing artifacts and update:
 

@@ -15,6 +15,9 @@
 
 - `make validate` 现在会检查 skill frontmatter、根目录与嵌套 skill 同步、
   installer 可执行权限，以及临时 Codex/Claude skill 安装 smoke test。
+- `make validate` 现在会运行 Codex adapter smoke test：初始化临时目标仓库、
+  验证 `AGENTS.md`、创建 episode，并在不依赖 repository-local helper scripts
+  的情况下完成 scoring。
 
 ## 0.1.0 - 2026-05-24
 

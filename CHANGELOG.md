@@ -17,6 +17,9 @@ All notable changes to VibeHarness are documented here.
 - `make validate` now checks skill frontmatter, root and nested skill sync,
   installer executability, and a temporary Codex/Claude skill install smoke
   test.
+- `make validate` now runs a Codex adapter smoke test that initializes a
+  temporary target repository, verifies `AGENTS.md`, creates an episode, and
+  scores it without relying on repository-local helper scripts.
 
 ## 0.1.0 - 2026-05-24
 

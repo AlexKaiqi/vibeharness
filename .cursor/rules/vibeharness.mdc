@@ -6,7 +6,9 @@ alwaysApply: true
 
 Use VibeHarness for non-trivial coding tasks.
 
-- Start an episode with `python3 scripts/vh_start.py --request "<request>"`.
+- Start an episode with `vh start --request "<request>"`.
+- If `vh` is unavailable in this checkout, use
+  `python3 -m vibeharness.cli start --request "<request>"`.
 - Record human interventions in the episode.
 - If a failure reveals a missing setup, tool, verification, memory, permission,
   or coordination capability, write a decision contract before changing harness
@@ -14,5 +16,6 @@ Use VibeHarness for non-trivial coding tasks.
 - Keep harness edits separate from product-code edits.
 - When recovery mode is required, roll product code back to the checkpoint and
   replay the original request.
-- Fill `scorecard.json` and run `python3 scripts/vh_score_episode.py <episode>`.
+- Fill `scorecard.json` and run `vh score <episode>` or
+  `python3 -m vibeharness.cli score <episode>`.
 - Do not expose hidden checks to the worker context.

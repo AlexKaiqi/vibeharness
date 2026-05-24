@@ -9,6 +9,7 @@ from typing import List
 
 from .ablation import run_ablation
 from .benchmark import validate_manifests
+from .codex_adapter import check_codex_adapter
 from .episode import score_episode_set
 from .examples import run_examples
 from .i18n import check_i18n
@@ -74,6 +75,15 @@ def validate_repo(root: Path) -> bool:
         ok = False
     else:
         print(f"Checked {skill_count} skill distribution invariant(s).")
+
+    print("==> Codex adapter smoke", flush=True)
+    codex_errors, codex_count = check_codex_adapter(root)
+    if codex_errors:
+        print("Codex adapter errors:")
+        print("\n".join(f"- {error}" for error in codex_errors))
+        ok = False
+    else:
+        print(f"Checked {codex_count} Codex adapter invariant(s).")
 
     print("==> todo fixture visible test", flush=True)
     if not run_fixture(["python3", "tests/test_visible.py"], root / "examples" / "fixtures" / "todo_cli"):

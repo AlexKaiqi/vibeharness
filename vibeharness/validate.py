@@ -14,6 +14,7 @@ from .examples import run_examples
 from .i18n import check_i18n
 from .init_assets import check_asset_sync
 from .links import check_links
+from .skill_distribution import check_skill_distribution
 
 
 def run_fixture(command: List[str], cwd: Path) -> bool:
@@ -64,6 +65,15 @@ def validate_repo(root: Path) -> bool:
         ok = False
     else:
         print(f"Packaged {asset_count} init asset file(s) are in sync.")
+
+    print("==> skill distribution", flush=True)
+    skill_errors, skill_count = check_skill_distribution(root)
+    if skill_errors:
+        print("Skill distribution errors:")
+        print("\n".join(f"- {error}" for error in skill_errors))
+        ok = False
+    else:
+        print(f"Checked {skill_count} skill distribution invariant(s).")
 
     print("==> todo fixture visible test", flush=True)
     if not run_fixture(["python3", "tests/test_visible.py"], root / "examples" / "fixtures" / "todo_cli"):

@@ -4,6 +4,18 @@
 
 这里记录 VibeHarness 的重要变更。
 
+## Unreleased
+
+### Added
+
+- 新增 skill-first 分发：根目录 `SKILL.md`、`skills/vibeharness/` 和
+  `install.sh`，让 Codex、Claude Code 和自定义 skills 目录用户无需安装 Python package 也能使用工作流。
+
+### Validation
+
+- `make validate` 现在会检查 skill frontmatter、根目录与嵌套 skill 同步、
+  installer 可执行权限，以及临时 Codex/Claude skill 安装 smoke test。
+
 ## 0.1.0 - 2026-05-24
 
 首次公开 workflow preview。

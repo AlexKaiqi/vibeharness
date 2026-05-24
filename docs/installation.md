@@ -2,8 +2,45 @@
 
 [English](installation.md) | [简体中文](installation.zh-CN.md)
 
-VibeHarness can be used directly from a checkout or installed as a local Python
-package.
+VibeHarness has two installation paths:
+
+1. Skill-first install for agent workflows, with no Python package required.
+2. Optional Python CLI install for episode scaffolding, scoring, and reports.
+
+## Skill Install
+
+From a checkout:
+
+```sh
+git clone https://github.com/AlexKaiqi/vibeharness.git
+cd vibeharness
+./install.sh
+```
+
+By default this installs the skill into:
+
+- `${CODEX_HOME:-$HOME/.codex}/skills/vibeharness`
+- `${CLAUDE_HOME:-$HOME/.claude}/skills/vibeharness`
+
+Use runtime-specific installs when needed:
+
+```sh
+./install.sh --codex-only
+./install.sh --claude-only
+./install.sh --cursor-only
+./install.sh --target /path/to/skills/vibeharness
+./install.sh --force
+```
+
+After installation, invoke the skill explicitly in your coding agent:
+
+```text
+Use $vibeharness to run this task as a checkpointed, replayable episode.
+```
+
+Skills-compatible installers can also target the `skills/vibeharness` folder
+directly. Use `--target` when a runtime has a different skills directory. The
+root `SKILL.md` is kept in sync for tools that expect a top-level skill entry.
 
 ## From Checkout
 
@@ -12,10 +49,10 @@ python3 -m vibeharness.cli validate
 python3 -m vibeharness.cli report
 ```
 
-This is what the Makefile uses, so contributors do not need to install anything
-extra.
+This is what the Makefile uses, so contributors do not need to install the CLI
+globally.
 
-## Package Install
+## Optional CLI Install
 
 ```sh
 python3 -m pip install .
@@ -34,7 +71,7 @@ For active development, use editable mode:
 python3 -m pip install -e .
 ```
 
-## Initialize Another Repository
+## Initialize Another Repository With Runtime Files
 
 From this project checkout or a local package install:
 
@@ -84,7 +121,7 @@ checkout.
 ## Maintainer Command
 
 When changing runtime templates or agent adapters, update packaged `vh init`
-assets before committing:
+assets and validate the skill distribution before committing:
 
 ```sh
 make sync-assets
@@ -94,4 +131,5 @@ make validate
 ## Packaging Status
 
 The package can be installed locally from a checkout and includes the runtime
-templates used by `vh init`. It is not published to PyPI yet.
+templates used by `vh init`. It is not published to PyPI yet. The skill install
+is the preferred public entry point for now.

@@ -4,6 +4,20 @@
 
 All notable changes to VibeHarness are documented here.
 
+## Unreleased
+
+### Added
+
+- Skill-first distribution via root `SKILL.md`, `skills/vibeharness/`, and
+  `install.sh`, so Codex, Claude Code, and custom skill-directory users can
+  install the workflow without installing the Python package.
+
+### Validation
+
+- `make validate` now checks skill frontmatter, root and nested skill sync,
+  installer executability, and a temporary Codex/Claude skill install smoke
+  test.
+
 ## 0.1.0 - 2026-05-24
 
 Initial public workflow preview.

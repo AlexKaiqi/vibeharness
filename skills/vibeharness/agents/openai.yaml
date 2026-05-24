@@ -1,0 +1,7 @@
+interface:
+  display_name: "VibeHarness"
+  short_description: "Replay interventions as harness fixes."
+  default_prompt: "Use $vibeharness to run this coding task as a checkpointed, replayable episode."
+
+policy:
+  allow_implicit_invocation: true

@@ -18,7 +18,18 @@ The core hypothesis is:
 
 ## Quick Start
 
-Run from a checkout:
+Install as an agent skill, with no Python package required:
+
+```sh
+git clone https://github.com/AlexKaiqi/vibeharness.git
+cd vibeharness
+./install.sh
+```
+
+Then ask your coding agent to use `$vibeharness` for checkpointed, replayable
+task recovery.
+
+For repository validation and examples, run from a checkout:
 
 ```sh
 make validate
@@ -26,7 +37,7 @@ make report
 make ablation
 ```
 
-Or install the local CLI:
+The CLI is optional and adds episode scaffolding, scoring, and reports:
 
 ```sh
 python3 -m pip install .
@@ -44,6 +55,9 @@ This repository contains:
 
 - `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`, `.claude/commands/`, and
   `.openhands/microagents/`: thin adapters for common coding agents.
+- `SKILL.md`, `skills/vibeharness/`, and `install.sh`: a skill-first
+  distribution that can be installed into Codex, Claude Code, or a custom
+  skills directory without installing the Python package.
 - `.vibeharness/`: the portable runtime config and episode templates.
 - `docs/landing_architecture.md`: the production architecture and operating
   modes.
@@ -82,8 +96,9 @@ VibeHarness is an early workflow preview. It includes a portable runtime,
 agent-specific adapters, executable examples, packaged CLI tooling, and
 validation checks that can be run from a fresh checkout.
 
-The current release focuses on replayable workflow mechanics. Broader empirical
-claims require sanitized real episodes, baselines, and transfer evaluation.
+The current release focuses on replayable workflow mechanics and lightweight
+skill installation. Broader empirical claims require sanitized real episodes,
+baselines, and transfer evaluation.
 
 ## What It Provides
 

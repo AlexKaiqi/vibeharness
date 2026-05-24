@@ -16,6 +16,30 @@ The core hypothesis is:
 > interventions, repairing the harness, rolling back, and replaying the task
 > until both the user task and the harness fix are verified.
 
+## Quick Start
+
+Run from a checkout:
+
+```sh
+make validate
+make report
+make ablation
+```
+
+Or install the local CLI:
+
+```sh
+python3 -m pip install .
+vh version
+vh validate
+vh init /path/to/target/repo
+```
+
+See [Installation](docs/installation.md) and
+[Verification](docs/verification.md) for details.
+
+## What's Included
+
 This repository contains:
 
 - `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`, `.claude/commands/`, and
@@ -61,7 +85,7 @@ validation checks that can be run from a fresh checkout.
 The current release focuses on replayable workflow mechanics. Broader empirical
 claims require sanitized real episodes, baselines, and transfer evaluation.
 
-## Practical Contribution
+## What It Provides
 
 1. A taxonomy of intervention-triggered harness failures in vibe coding.
 2. A repository-native episode package for every non-trivial agent run.

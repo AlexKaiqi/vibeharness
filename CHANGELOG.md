@@ -38,4 +38,5 @@ Initial public workflow preview.
 - This release is a workflow preview, not a polished empirical benchmark.
 - No real-world intervention dataset is included yet.
 - No PyPI package is published yet.
-- The paper draft still marks empirical numbers as `TODO`.
+- Empirical intervention-reduction claims are intentionally not made in this
+  release.

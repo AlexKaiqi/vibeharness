@@ -37,4 +37,4 @@
 - 这个 release 是 workflow preview，不是成熟 empirical benchmark。
 - 还没有包含真实世界 intervention dataset。
 - 还没有发布 PyPI package。
-- 论文草稿中的 empirical numbers 仍然标记为 `TODO`。
+- 本 release 暂不声称已经证明 intervention reduction。

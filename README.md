@@ -29,8 +29,6 @@ This repository contains:
 - `docs/agent_adapters.md`: adapter notes for Codex, Claude Code, Cursor, and
   OpenHands.
 - `docs/prior_art.md`: prior art, lineage, and acknowledgements.
-- `docs/publication_strategy.md`: when the project is worth publishing as a
-  paper.
 - `docs/open_source_readiness.md`: checklist for public open-source release.
 - `docs/release_process.md`: lightweight release and tagging process.
 - `docs/verification.md`: what `make validate` checks and what it does not
@@ -45,7 +43,6 @@ This repository contains:
 - `CONTRIBUTING.md`, `SECURITY.md`, `.github/`: community and contribution
   files.
 - `CHANGELOG.md`: current release notes and known limits.
-- `paper/`: a first paper draft and references.
 - `benchmark/`: the proposed VibeHarnessBench task format, metrics, and seed
   task cards.
 - `benchmark/metrics.md` and `benchmark/scoring_rubric.md`: binary primary
@@ -56,14 +53,14 @@ This repository contains:
   package and packaged `vh init` templates.
 - `scripts/`: lightweight utilities for validating benchmark manifests.
 
-## Current Status
+## Status
 
-This is now organized as a landing-oriented workflow first and a paper scaffold
-second. The useful product claim is not "harness engineering is new"; it is:
-user interventions should become durable, replayable harness improvements.
+VibeHarness is an early workflow preview. It includes a portable runtime,
+agent-specific adapters, executable examples, packaged CLI tooling, and
+validation checks that can be run from a fresh checkout.
 
-The paper draft intentionally marks empirical numbers as `TODO` rather than
-inventing results.
+The current release focuses on replayable workflow mechanics. Broader empirical
+claims require sanitized real episodes, baselines, and transfer evaluation.
 
 ## Practical Contribution
 
@@ -80,11 +77,7 @@ inventing results.
 VibeHarness builds on recent harness-engineering, agent-recovery, benchmark, and
 trajectory-audit work. See [Prior Art and Acknowledgements](docs/prior_art.md).
 
-## Publication and Open Source
-
-The project is worth publishing as a paper only after the workflow has empirical
-evidence from real or realistic episodes. See
-[Publication Strategy](docs/publication_strategy.md).
+## Open Source
 
 For open-source release readiness, see
 [Open-Source Readiness](docs/open_source_readiness.md). The repository still
@@ -144,8 +137,7 @@ See [Installation](docs/installation.md).
 2. Collect episodes where the user had to intervene.
 3. Promote recurring interventions into VH-Recovery harness repairs.
 4. Run held-out tasks by transfer group and compare against the old workflow.
-5. Only after the workflow has measurable gains, turn the data into a paper or
-   public benchmark.
+5. Turn measured gains into a public evaluation report and benchmark pack.
 
 ## Local Commands
 
@@ -158,5 +150,4 @@ make episodes
 make i18n-check
 make episode REQUEST="implement the user request"
 EPISODE=.vibeharness/episodes/<id> make score-episode
-make paper
 ```

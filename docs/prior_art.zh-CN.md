@@ -2,7 +2,7 @@
 
 [English](prior_art.md) | 简体中文
 
-VibeHarness 不声称自己发明了 harness engineering。它更像是把 coding-agent benchmark、agent harness engineering、恢复系统、trajectory audit、生产级 agent 工具中的成熟想法组合成一套可落地 workflow。
+VibeHarness 建立在 coding-agent benchmark、agent harness engineering、恢复系统、trajectory audit、生产级 agent 工具之上。本页记录这些 lineage，让项目始终尊重已有工作。
 
 ## VibeHarness 的增量价值
 
@@ -58,7 +58,7 @@ VibeHarness 不声称自己发明了 harness engineering。它更像是把 codin
 
 ## 致谢
 
-我们感谢以上工作和作者，它们让 harness、benchmark、coding-agent recovery 和 trajectory audit 这些概念足够具体，可以被进一步工程化。VibeHarness 应该被理解为围绕一个反复出现的生产问题做出的工程综合与产品化：用户介入应该变成持久、可回放、可迁移的 harness 改进。
+我们感谢以上工作和作者，它们让 harness、benchmark、coding-agent recovery 和 trajectory audit 这些概念足够具体，可以被进一步工程化。VibeHarness 应被理解为围绕一个反复出现的生产问题做出的工程综合：coding session 结束后，intervention evidence 往往没有被保留下来。
 
 ## 引用策略
 

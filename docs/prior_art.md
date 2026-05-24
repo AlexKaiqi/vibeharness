@@ -2,9 +2,9 @@
 
 [English](prior_art.md) | [简体中文](prior_art.zh-CN.md)
 
-VibeHarness is not presented as the invention of harness engineering. It is a
-practical composition of ideas from coding-agent benchmarks, agent harness
-engineering, recovery systems, audit work, and production agent tools.
+VibeHarness builds on coding-agent benchmarks, agent harness engineering,
+recovery systems, audit work, and production agent tools. This page records that
+lineage and keeps the project grounded in prior work.
 
 ## What VibeHarness Adds
 
@@ -79,9 +79,9 @@ The distinctive value is narrow:
 
 We thank the authors and maintainers of the work above for making harnesses,
 benchmarks, coding-agent recovery, and trajectory audit concrete enough to build
-on. VibeHarness should be read as an engineering synthesis and productization of
-those ideas around one recurring operational problem: user interventions that
-should become durable, replayable harness improvements.
+on. VibeHarness should be read as an engineering synthesis around a recurring
+operational problem: intervention evidence that is often lost after a coding
+session ends.
 
 ## Citation Policy
 

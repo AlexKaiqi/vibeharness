@@ -6,7 +6,7 @@ VibeHarness 是一个 intervention-driven harness recovery loop，面向 coding 
 
 ## 相关评估检查
 
-framework 把以下相关工作主题作为 evaluation checks。它们不是直接 implementation dependencies：
+framework 把以下相关工作主题作为 evaluation checks：
 
 - Agentic harness engineering：每个可编辑 harness component 都应显式、可回滚，并关联到可证伪预测。
 - AgentFlow-style orchestration：multi-agent orchestration 应表示为 roles、tools、message channels 和 coordination protocols 的 typed graph。

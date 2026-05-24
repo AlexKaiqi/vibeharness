@@ -2,7 +2,7 @@
 
 [English](prior_art.md) | 简体中文
 
-本页收集相关工作与致谢。除非在具体概念旁明确说明来源，否则 VibeHarness 当前没有直接复用这些论文的方法、代码或 benchmark 数据。下面的 references 主要用于尊重邻近工作，并说明项目所处的上下文。
+本页收集相关工作与致谢。下面的 references 主要用于尊重邻近工作，并说明项目所处的上下文。
 
 ## VibeHarness 的增量价值
 
@@ -60,6 +60,6 @@
 
 我们感谢以上工作和作者，它们让 harness、benchmark、coding-agent recovery 和 trajectory audit 这些概念足够具体，可以被进一步工程化。VibeHarness 应被理解为围绕一个反复出现的生产问题做出的工程实践：coding session 结束后，intervention evidence 往往没有被保留下来。
 
-## 引用策略
+## Attribution Practice
 
-当 VibeHarness 直接使用其他工作的概念、方法、数据集或实现时，文档应在使用处附近说明来源，而不是只放在 bibliography。产品型 artifact 可以链接到本页，作为简洁的致谢列表。
+如果未来 VibeHarness artifact 依赖某个具体来源，相关文档应在使用处附近引用它。产品型 artifact 可以链接到本页，作为简洁的致谢列表。

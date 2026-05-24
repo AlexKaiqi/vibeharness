@@ -2,9 +2,7 @@
 
 [English](prior_art.md) | [简体中文](prior_art.zh-CN.md)
 
-This page collects related work and acknowledgements. VibeHarness does not
-directly reuse the methods, code, or benchmark data from these papers unless a
-specific source is named near the relevant concept. The references below are
+This page collects related work and acknowledgements. The references below are
 included to respect neighboring work and to make the project context clear.
 
 ## What VibeHarness Adds
@@ -84,9 +82,8 @@ on. VibeHarness should be read as an engineering synthesis around a recurring
 operational problem: intervention evidence that is often lost after a coding
 session ends.
 
-## Citation Policy
+## Attribution Practice
 
-When VibeHarness directly uses a concept, method, dataset, or implementation
-from another work, the documentation should name the source near that use, not
-only in a bibliography. Product-facing artifacts can link to this page as a
-compact acknowledgement list.
+When a future VibeHarness artifact relies on a specific source, the relevant
+documentation should cite it near the point of use. Product-facing artifacts can
+link to this page as a compact acknowledgement list.

@@ -8,8 +8,8 @@ environment system, not as an isolated hint for the current patch.
 
 ## Related Evaluation Checks
 
-The framework uses the following related-work themes as evaluation checks. These
-are not direct implementation dependencies:
+The framework keeps the following related-work themes in view as evaluation
+checks:
 
 - Agentic harness engineering: every editable harness component should be
   explicit, revertible, and linked to a falsifiable prediction.

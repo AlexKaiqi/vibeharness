@@ -19,11 +19,24 @@ scorecard pipeline works.
 - examples: 3
 - fixture pass rate: 1.00
 - episode primary pass rate: 1.00
+- ablation visible-only pass rate: 1.00
+- ablation gap-probe failure rate: 1.00
+- ablation replay pass rate: 1.00
+- ablation recovered-gap rate: 1.00
+
+## Ablation Results
+
+| Example | Failure class | Visible-only | Gap probe | Replay | Recovered |
+| --- | --- | --- | --- | --- | --- |
+| `todo_cli_spec_capture` | `spec_capture` | pass | exposed | pass | pass |
+| `env_bootstrap_notes` | `environment_bootstrap` | pass | exposed | pass | pass |
+| `ui_snapshot_tasks` | `tool_affordance` | pass | exposed | pass | pass |
 
 ## Reproduce
 
 ```sh
 make report
+make ablation
 ```
 
 This writes local generated reports under `reports/`, which is ignored by git.
@@ -42,3 +55,7 @@ The examples cover three recovery classes:
 These examples do not prove that VibeHarness reduces interventions in real
 projects. That requires real or realistic intervention episodes, baselines, and
 the evaluation plan in `docs/evaluation.md`.
+
+The ablation report proves only a narrower claim for the bundled examples:
+visible-only checks can miss the harness gap, the gap probe exposes it, and the
+repaired harness path replays successfully.

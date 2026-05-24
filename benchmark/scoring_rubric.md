@@ -1,5 +1,7 @@
 # Scoring Rubric
 
+[English](scoring_rubric.md) | [简体中文](scoring_rubric.zh-CN.md)
+
 Each task receives a binary primary score and diagnostic subscores.
 
 ## Primary VibeHarness Score

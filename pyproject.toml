@@ -34,3 +34,17 @@ vh = "vibeharness.cli:main"
 
 [tool.setuptools]
 packages = ["vibeharness"]
+
+[tool.setuptools.package-data]
+vibeharness = [
+  "assets/AGENTS.md",
+  "assets/CLAUDE.md",
+  "assets/.vibeharness/*.json",
+  "assets/.vibeharness/*.md",
+  "assets/.vibeharness/templates/*.json",
+  "assets/.vibeharness/templates/*.md",
+  "assets/.claude/*.json",
+  "assets/.claude/commands/*.md",
+  "assets/.cursor/rules/*.mdc",
+  "assets/.openhands/microagents/*.md"
+]

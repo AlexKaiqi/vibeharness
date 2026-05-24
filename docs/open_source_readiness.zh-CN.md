@@ -18,23 +18,27 @@
 - benchmark manifest validator；
 - i18n 状态检查脚本；
 - 用 GitHub Actions 跑 `make validate`；
-- contribution、security、conduct、issue、pull request templates。
+- contribution、security、conduct、issue、pull request templates；
 - 一个 executable example fixture；
-- 一个脱敏 example episode。
+- 一个脱敏 example episode；
 - examples 中已有三个 recovery classes：`spec_capture`、
   `environment_bootstrap` 和 `tool_affordance`；
-- 本地 example evaluation report runner。
-- 带 `vh` 命令的本地 editable CLI package path。
+- 本地 example evaluation report runner；
+- 内置 harness-gap probes 的 executable ablation runner；
+- 用于验证 collected episode directories 的 episode-set scorer；
+- 可本地安装的 CLI package，并包含 packaged `vh init` templates；
+- 高优先级 docs 和 benchmark pages 的中文翻译已补齐。
 
 还不够支撑成熟发布的部分：
 
 - 还没有真实世界 intervention dataset；
-- benchmark 和 framework 文档的中文翻译还不完整。
+- 还没有外部 user study 或 multi-repository evaluation。
 
 ## 成熟公开发布前必须补齐
 
-- 来自多个 agent tools 的真实脱敏 episodes。
-- 完成高优先级中文文档翻译。
+- 来自多个 agent tools 的真实脱敏 episodes；
+- 至少一个 transfer group 的 multi-repository evaluation；
+- release notes 和 version tag。
 
 ## License 建议
 
@@ -67,7 +71,8 @@
 - VH-Lite 能端到端跑通；
 - VH-Recovery 已文档化并可手动运行；
 - 至少包含一个 example episode；
+- 内置 ablations 能暴露 harness gaps，并通过 replay 恢复；
 - CI 中 `make validate` 通过；
 - issue templates 可用；
 - Apache-2.0 license 已存在；
-- 缺失翻译被追踪，而不是被隐藏。
+- i18n 状态在 CI 中检查。

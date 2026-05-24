@@ -18,14 +18,23 @@ The equivalent CLI command is:
 vh validate
 ```
 
+From a checkout, the same command is available without installing the CLI:
+
+```sh
+python3 -m vibeharness.cli validate
+```
+
 This runs:
 
 - benchmark manifest validation;
 - i18n status validation;
 - local Markdown link checking;
+- packaged `vh init` asset sync checking;
 - executable fixture tests;
 - sanitized example episode scoring;
-- example evaluation report generation.
+- bundled episode-set scoring;
+- example evaluation report generation;
+- executable ablation report generation.
 
 ## Example Command
 
@@ -36,16 +45,56 @@ make example
 This runs only the todo CLI fixture and the example episode scorecard. Use it
 when changing example files.
 
+## Episodes Command
+
+```sh
+make episodes
+```
+
+Equivalent CLI forms:
+
+```sh
+vh episodes examples/episodes
+python3 -m vibeharness.cli episodes examples/episodes
+```
+
+This scores every episode directory under the given path.
+
 ## Report Command
 
 ```sh
 make report
 ```
 
+Equivalent CLI forms:
+
+```sh
+vh report
+python3 -m vibeharness.cli report
+```
+
 This runs all bundled executable examples and writes:
 
 - `reports/example_evaluation.json`
 - `reports/example_evaluation.md`
+
+## Ablation Command
+
+```sh
+make ablation
+```
+
+Equivalent CLI forms:
+
+```sh
+vh ablation
+python3 -m vibeharness.cli ablation
+```
+
+This runs bundled gap probes and writes:
+
+- `reports/ablation_evaluation.json`
+- `reports/ablation_evaluation.md`
 
 ## Paper Command
 
@@ -64,9 +113,12 @@ normal contributors.
 - task manifests remain structurally valid;
 - bilingual documentation status is tracked;
 - repository-local documentation links resolve;
+- packaged `vh init` templates match their source files;
 - the executable fixture still works;
-- the example episode has a passing primary score;
-- the bundled examples can produce an evaluation report.
+- the bundled example episodes have passing primary scores;
+- the bundled examples can produce an evaluation report;
+- visible-only checks can pass while gap probes fail, and the repaired harness
+  path can replay successfully on bundled ablations.
 
 It does not prove the research claim. That requires real or realistic episodes,
 baselines, and intervention-reduction measurements as described in

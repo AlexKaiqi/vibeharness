@@ -83,6 +83,14 @@
       "notes": "Installation and CLI guide."
     },
     {
+      "source": "docs/episode_collection.md",
+      "locale": "zh-CN",
+      "target": "docs/episode_collection.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Episode dataset collection and sanitization guide."
+    },
+    {
       "source": "ROADMAP.md",
       "locale": "zh-CN",
       "target": "ROADMAP.zh-CN.md",
@@ -102,36 +110,41 @@
       "source": "docs/agent_adapters.md",
       "locale": "zh-CN",
       "target": "docs/agent_adapters.zh-CN.md",
-      "status": "missing",
-      "notes": "Needs Chinese translation after adapter wording stabilizes."
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Agent adapter guidance."
     },
     {
       "source": "docs/framework.md",
       "locale": "zh-CN",
       "target": "docs/framework.zh-CN.md",
-      "status": "missing",
-      "notes": "Needs Chinese translation after framework names stabilize."
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Core framework model."
     },
     {
       "source": "benchmark/README.md",
       "locale": "zh-CN",
       "target": "benchmark/README.zh-CN.md",
-      "status": "missing",
-      "notes": "Benchmark spec translation pending."
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Benchmark overview."
     },
     {
       "source": "benchmark/metrics.md",
       "locale": "zh-CN",
       "target": "benchmark/metrics.zh-CN.md",
-      "status": "missing",
-      "notes": "Metrics translation pending."
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Benchmark metrics."
     },
     {
       "source": "benchmark/scoring_rubric.md",
       "locale": "zh-CN",
       "target": "benchmark/scoring_rubric.zh-CN.md",
-      "status": "missing",
-      "notes": "Scoring rubric translation pending."
+      "status": "current",
+      "reviewed_at": "2026-05-24",
+      "notes": "Scoring rubric."
     }
   ]
 }

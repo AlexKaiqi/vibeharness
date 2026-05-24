@@ -85,6 +85,18 @@ Run each task class through:
 - `vh_recovery`: decision contract + harness edit + rollback + replay.
 - `vh_full`: recovery plus trajectory audit and transfer evaluation.
 
+## Local Executable Checks
+
+The repository includes three local checks before real episodes exist:
+
+- `make report`: verifies bundled fixtures and sanitized episode scorecards.
+- `make ablation`: runs visible-only checks, gap probes, and repaired replay
+  checks for the bundled recovery classes.
+- `make episodes`: scores all bundled episode packages.
+
+These are smoke tests for the evaluation harness. They do not replace real
+intervention-reduction measurements.
+
 ## Weekly Review
 
 Every week, review:

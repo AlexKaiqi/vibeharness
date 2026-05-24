@@ -1,4 +1,4 @@
-.PHONY: validate i18n-check links-check example report paper arxiv episode score-episode clean
+.PHONY: validate i18n-check links-check example report ablation episodes paper arxiv episode score-episode sync-assets clean
 
 validate:
 	python3 -m vibeharness.cli validate
@@ -16,6 +16,12 @@ example:
 report:
 	python3 -m vibeharness.cli report
 
+ablation:
+	python3 -m vibeharness.cli ablation
+
+episodes:
+	python3 -m vibeharness.cli episodes examples/episodes
+
 paper:
 	tectonic paper/main.tex --keep-logs --keep-intermediates
 
@@ -28,6 +34,9 @@ episode:
 score-episode:
 	@test -n "$$EPISODE" || (echo "Set EPISODE=.vibeharness/episodes/<id>" && exit 1)
 	python3 -m vibeharness.cli score "$$EPISODE"
+
+sync-assets:
+	python3 scripts/sync_package_assets.py
 
 clean:
 	rm -f paper/*.aux paper/*.bbl paper/*.blg paper/*.log paper/*.out paper/*.toc paper/*.xdv

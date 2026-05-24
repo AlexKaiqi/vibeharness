@@ -26,6 +26,8 @@ This repository contains:
 - `docs/evaluation.md`: practical evaluation plan for reliability, intervention
   reduction, transfer, and safety.
 - `docs/i18n.md`: bilingual documentation maintenance policy.
+- `docs/agent_adapters.md`: adapter notes for Codex, Claude Code, Cursor, and
+  OpenHands.
 - `docs/prior_art.md`: prior art, lineage, and acknowledgements.
 - `docs/publication_strategy.md`: when the project is worth publishing as a
   paper.
@@ -33,19 +35,23 @@ This repository contains:
 - `docs/verification.md`: what `make validate` checks and what it does not
   prove.
 - `docs/example_results.md`: current bundled example evaluation results.
+- `docs/episode_collection.md`: how to collect, sanitize, score, and split
+  episodes.
 - `docs/licensing.md`: license choice, attribution expectations, and reuse
   boundaries.
-- `docs/installation.md`: local usage, editable install, and `vh init`.
+- `docs/installation.md`: local package usage, editable development install,
+  and `vh init`.
 - `CONTRIBUTING.md`, `SECURITY.md`, `.github/`: community and contribution
   files.
 - `paper/`: a first paper draft and references.
 - `benchmark/`: the proposed VibeHarnessBench task format, metrics, and seed
   task cards.
-- `benchmark/scoring_rubric.md`: binary primary score and diagnostic subscore
-  definitions.
+- `benchmark/metrics.md` and `benchmark/scoring_rubric.md`: binary primary
+  score and diagnostic subscore definitions.
 - `docs/framework.md`: the current framework design, including the parts
   absorbed from recent harness-engineering papers.
-- `vibeharness/` and `pyproject.toml`: local editable CLI package preview.
+- `vibeharness/`, `vibeharness/assets/`, and `pyproject.toml`: local CLI
+  package and packaged `vh init` templates.
 - `scripts/`: lightweight utilities for validating benchmark manifests.
 
 ## Current Status
@@ -93,6 +99,7 @@ Run the executable fixture and sanitized episode:
 ```sh
 make example
 make report
+make ablation
 ```
 
 ## Verification
@@ -119,8 +126,10 @@ python3 -m vibeharness.cli validate
 Or install the local CLI:
 
 ```sh
-python3 -m pip install -e .
+python3 -m pip install .
 vh validate
+vh ablation
+vh episodes examples/episodes
 vh init /path/to/target/repo
 ```
 
@@ -141,6 +150,8 @@ See [Installation](docs/installation.md).
 make validate
 make example
 make report
+make ablation
+make episodes
 make i18n-check
 make episode REQUEST="implement the user request"
 EPISODE=.vibeharness/episodes/<id> make score-episode

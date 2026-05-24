@@ -16,14 +16,23 @@ make validate
 vh validate
 ```
 
+如果直接从 checkout 使用、没有安装 CLI，也可以运行：
+
+```sh
+python3 -m vibeharness.cli validate
+```
+
 它会运行：
 
 - benchmark manifest validation；
 - i18n status validation；
 - 本地 Markdown link checking；
+- packaged `vh init` asset sync checking；
 - executable fixture tests；
 - 脱敏 example episode scoring；
-- example evaluation report generation。
+- bundled episode-set scoring；
+- example evaluation report generation；
+- executable ablation report generation。
 
 ## 示例命令
 
@@ -33,16 +42,56 @@ make example
 
 它只运行 todo CLI fixture 和 example episode scorecard。修改 example 文件时使用这个命令。
 
+## Episodes 命令
+
+```sh
+make episodes
+```
+
+等价 CLI 形式：
+
+```sh
+vh episodes examples/episodes
+python3 -m vibeharness.cli episodes examples/episodes
+```
+
+它会评分给定路径下的每个 episode directory。
+
 ## 报告命令
 
 ```sh
 make report
 ```
 
+等价 CLI 形式：
+
+```sh
+vh report
+python3 -m vibeharness.cli report
+```
+
 它会运行所有内置 executable examples，并写入：
 
 - `reports/example_evaluation.json`
 - `reports/example_evaluation.md`
+
+## Ablation 命令
+
+```sh
+make ablation
+```
+
+等价 CLI 形式：
+
+```sh
+vh ablation
+python3 -m vibeharness.cli ablation
+```
+
+它会运行内置 gap probes，并写入：
+
+- `reports/ablation_evaluation.json`
+- `reports/ablation_evaluation.md`
 
 ## 论文命令
 
@@ -59,8 +108,10 @@ make paper
 - task manifests 结构合法；
 - 双语文档状态被追踪；
 - 仓库内 Markdown 链接可解析；
+- packaged `vh init` templates 与 source files 保持一致；
 - executable fixture 仍然可运行；
-- example episode 的 primary score 通过；
-- 内置 examples 能生成 evaluation report。
+- 内置 example episodes 的 primary scores 通过；
+- 内置 examples 能生成 evaluation report；
+- visible-only checks 可以通过，而 gap probes 会失败；repaired harness 路径能在内置 ablations 上 replay 成功。
 
 它不证明研究主张。研究主张仍然需要真实或现实化 episodes、baselines，以及 `docs/evaluation.md` 中描述的 intervention-reduction measurements。

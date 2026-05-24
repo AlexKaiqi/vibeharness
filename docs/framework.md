@@ -1,5 +1,7 @@
 # VibeHarness Framework
 
+[English](framework.md) | [简体中文](framework.zh-CN.md)
+
 VibeHarness is an intervention-driven harness recovery loop for coding agents.
 It treats a user intervention as a structured signal about the model-harness-
 environment system, not as an isolated hint for the current patch.

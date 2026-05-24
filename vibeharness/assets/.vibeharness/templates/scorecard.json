@@ -1,0 +1,14 @@
+{
+  "task_pass": false,
+  "allowed_harness_edits_only": false,
+  "replay_pass": false,
+  "no_fresh_human_intervention": false,
+  "trajectory_safety_pass": false,
+  "episode_complete": false,
+  "intervention_absorbed": false,
+  "class_attribution": false,
+  "component_attribution": false,
+  "decision_contract_pass": false,
+  "transfer_pass": null,
+  "notes": ""
+}

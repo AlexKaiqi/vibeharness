@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[vibeharness] remember to record manual recovery commands in the active episode\""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,30 +6,32 @@ import argparse
 import json
 import shutil
 import sys
+from importlib.resources import files
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, List, Optional
 
+from .ablation import run_ablation
 from .benchmark import validate_manifests
-from .episode import create_episode, score_episode
+from .episode import create_episode, score_episode, score_episode_set
 from .examples import run_examples
 from .i18n import check_i18n
+from .init_assets import INIT_PATHS
 from .links import check_links
-from .paths import find_repo_root, package_root
+from .paths import find_repo_root
 from .validate import validate_repo
 
 
-INIT_PATHS = [
-    ".vibeharness",
-    "AGENTS.md",
-    "CLAUDE.md",
-    ".claude/commands",
-    ".claude/settings.example.json",
-    ".cursor/rules",
-    ".openhands/microagents",
-]
+def copy_resource(src: Any, dst: Path) -> None:
+    if src.is_dir():
+        dst.mkdir(parents=True, exist_ok=True)
+        for child in src.iterdir():
+            copy_resource(child, dst / child.name)
+        return
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    dst.write_bytes(src.read_bytes())
 
 
-def copy_path(src: Path, dst: Path, force: bool) -> None:
+def copy_path(src: Any, dst: Path, force: bool) -> None:
     if dst.exists():
         if not force:
             print(f"skip existing {dst}")
@@ -38,21 +40,17 @@ def copy_path(src: Path, dst: Path, force: bool) -> None:
             shutil.rmtree(dst)
         else:
             dst.unlink()
-    if src.is_dir():
-        shutil.copytree(src, dst)
-    else:
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(src, dst)
+    copy_resource(src, dst)
     print(f"wrote {dst}")
 
 
 def cmd_init(args: argparse.Namespace) -> int:
-    source_root = package_root()
+    source_root = files("vibeharness").joinpath("assets")
     target = Path(args.path).resolve()
     target.mkdir(parents=True, exist_ok=True)
     for rel in INIT_PATHS:
-        src = source_root / rel
-        if src.exists():
+        src = source_root.joinpath(rel)
+        if src.is_dir() or src.is_file():
             copy_path(src, target / rel, args.force)
     return 0
 
@@ -71,6 +69,13 @@ def cmd_score(args: argparse.Namespace) -> int:
     return 0 if passed else 2
 
 
+def cmd_episodes(args: argparse.Namespace) -> int:
+    root = find_repo_root()
+    report, passed = score_episode_set(root, Path(args.path))
+    print(json.dumps(report, indent=2))
+    return 0 if passed else 2
+
+
 def cmd_validate(args: argparse.Namespace) -> int:
     root = find_repo_root()
     return 0 if validate_repo(root) else 1
@@ -82,6 +87,14 @@ def cmd_report(args: argparse.Namespace) -> int:
     print(json.dumps(report["summary"], indent=2))
     summary = report["summary"]
     return 0 if summary["fixture_pass_rate"] == 1 and summary["episode_primary_pass_rate"] == 1 else 1
+
+
+def cmd_ablation(args: argparse.Namespace) -> int:
+    root = find_repo_root()
+    report = run_ablation(root)
+    print(json.dumps(report["summary"], indent=2))
+    summary = report["summary"]
+    return 0 if summary["recovered_gap_rate"] == 1 else 1
 
 
 def cmd_links(args: argparse.Namespace) -> int:
@@ -140,11 +153,18 @@ def build_parser() -> argparse.ArgumentParser:
     score.add_argument("episode")
     score.set_defaults(func=cmd_score)
 
+    episodes = subparsers.add_parser("episodes", help="Score an episode directory")
+    episodes.add_argument("path", nargs="?", default="examples/episodes")
+    episodes.set_defaults(func=cmd_episodes)
+
     validate = subparsers.add_parser("validate", help="Run repository validation")
     validate.set_defaults(func=cmd_validate)
 
     report = subparsers.add_parser("report", help="Run bundled example evaluation")
     report.set_defaults(func=cmd_report)
+
+    ablation = subparsers.add_parser("ablation", help="Run bundled ablation evaluation")
+    ablation.set_defaults(func=cmd_ablation)
 
     links = subparsers.add_parser("links", help="Check local Markdown links")
     links.set_defaults(func=cmd_links)

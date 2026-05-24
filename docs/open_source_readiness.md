@@ -18,23 +18,27 @@ Ready enough for an early open-source release:
 - benchmark manifest validator;
 - i18n status checker;
 - GitHub Actions for `make validate`;
-- contribution, security, conduct, issue, and pull request templates.
+- contribution, security, conduct, issue, and pull request templates;
 - one executable example fixture;
-- one sanitized example episode.
+- one sanitized example episode;
 - three bundled recovery classes in examples: `spec_capture`,
   `environment_bootstrap`, and `tool_affordance`;
-- local example evaluation report runner.
-- local editable CLI package path with `vh` commands.
+- local example evaluation report runner;
+- executable ablation runner for bundled harness-gap probes;
+- episode-set scorer for validating collected episode directories;
+- installable local CLI package with packaged `vh init` templates;
+- current Chinese translations for the high-priority docs and benchmark pages.
 
 Not ready for a polished release:
 
 - no real-world intervention dataset yet;
-- incomplete Chinese translations for benchmark and framework docs.
+- no external user study or multi-repository evaluation yet.
 
 ## Must Add Before Polished Announcement
 
-- real sanitized episodes from multiple agent tools.
-- completed Chinese translations for high-priority docs.
+- real sanitized episodes from multiple agent tools;
+- multi-repository evaluation with at least one transfer group;
+- release notes and version tag.
 
 ## License Recommendation
 
@@ -74,7 +78,8 @@ The first public milestone should be `v0.1`:
 - VH-Lite works end to end;
 - VH-Recovery is documented and manually runnable;
 - at least one example episode is included;
+- bundled ablations expose harness gaps and recover them through replay;
 - `make validate` passes in CI;
 - issue templates are available;
 - Apache-2.0 license is present;
-- missing translations are tracked rather than hidden.
+- i18n status is checked in CI.

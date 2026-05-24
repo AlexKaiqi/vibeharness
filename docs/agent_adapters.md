@@ -1,5 +1,7 @@
 # Agent Adapter Notes
 
+[English](agent_adapters.md) | [简体中文](agent_adapters.zh-CN.md)
+
 VibeHarness stays portable by using each tool's native instruction/config
 surface instead of building a vendor-specific wrapper.
 

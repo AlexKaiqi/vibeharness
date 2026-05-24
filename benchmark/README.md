@@ -1,5 +1,7 @@
 # VibeHarnessBench
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 VibeHarnessBench evaluates whether an agentic coding workflow can transform
 human intervention into durable harness improvement.
 

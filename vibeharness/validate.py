@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+import json
 import subprocess
 from pathlib import Path
 from typing import List
 
+from .ablation import run_ablation
 from .benchmark import validate_manifests
-from .episode import score_episode
+from .episode import score_episode_set
 from .examples import run_examples
 from .i18n import check_i18n
+from .init_assets import check_asset_sync
 from .links import check_links
 
 
@@ -53,6 +56,15 @@ def validate_repo(root: Path) -> bool:
     else:
         print(f"Checked {checked} local Markdown link(s).")
 
+    print("==> packaged init assets", flush=True)
+    asset_errors, asset_count = check_asset_sync(root)
+    if asset_errors:
+        print("Packaged init asset errors:")
+        print("\n".join(f"- {error}" for error in asset_errors))
+        ok = False
+    else:
+        print(f"Packaged {asset_count} init asset file(s) are in sync.")
+
     print("==> todo fixture visible test", flush=True)
     if not run_fixture(["python3", "tests/test_visible.py"], root / "examples" / "fixtures" / "todo_cli"):
         ok = False
@@ -61,12 +73,10 @@ def validate_repo(root: Path) -> bool:
     if not run_fixture(["python3", "tests/test_acceptance.py"], root / "examples" / "fixtures" / "todo_cli"):
         ok = False
 
-    print("==> example episode score", flush=True)
-    report, primary_pass = score_episode(root, root / "examples" / "episodes" / "todo_cli_spec_capture")
-    import json
-
-    print(json.dumps(report, indent=2))
-    if not primary_pass:
+    print("==> bundled episode scores", flush=True)
+    episode_report, episode_pass = score_episode_set(root, root / "examples" / "episodes")
+    print(json.dumps(episode_report["summary"], indent=2))
+    if not episode_pass:
         ok = False
 
     print("==> example evaluation report", flush=True)
@@ -74,6 +84,13 @@ def validate_repo(root: Path) -> bool:
     print(json.dumps(example_report["summary"], indent=2))
     summary = example_report["summary"]
     if summary["fixture_pass_rate"] != 1 or summary["episode_primary_pass_rate"] != 1:
+        ok = False
+
+    print("==> ablation evaluation report", flush=True)
+    ablation_report = run_ablation(root)
+    print(json.dumps(ablation_report["summary"], indent=2))
+    ablation_summary = ablation_report["summary"]
+    if ablation_summary["recovered_gap_rate"] != 1:
         ok = False
 
     if ok:

@@ -25,7 +25,10 @@ This directory contains executable fixtures and sanitized episode packages.
 
 ```sh
 make report
+make ablation
+make episodes
 ```
 
 This writes `reports/example_evaluation.json` and
-`reports/example_evaluation.md`.
+`reports/example_evaluation.md`, plus ablation reports that check whether the
+bundled harness gaps are exposed and recovered.

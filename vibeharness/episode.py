@@ -117,3 +117,51 @@ def score_episode(root: Path, episode: Path) -> Tuple[Dict[str, Any], bool]:
         },
     }
     return report, primary_pass
+
+
+def discover_episode_dirs(root: Path, path: Path) -> List[Path]:
+    if not path.is_absolute():
+        path = root / path
+    if path.is_dir() and (path / "manifest.json").exists():
+        return [path]
+    if not path.exists():
+        raise SystemExit(f"Episode path not found: {path}")
+    return sorted(
+        item
+        for item in path.iterdir()
+        if item.is_dir() and ((item / "manifest.json").exists() or (item / "scorecard.json").exists())
+    )
+
+
+def score_episode_set(root: Path, path: Path) -> Tuple[Dict[str, Any], bool]:
+    episode_dirs = discover_episode_dirs(root, path)
+    reports = []
+    passed_count = 0
+
+    for episode_dir in episode_dirs:
+        try:
+            report, passed = score_episode(root, episode_dir)
+        except SystemExit as exc:
+            report = {
+                "episode": str(episode_dir.relative_to(root)),
+                "primary_pass": False,
+                "error": str(exc),
+            }
+            passed = False
+        reports.append(report)
+        if passed:
+            passed_count += 1
+
+    count = len(reports)
+    summary = {
+        "episodes": count,
+        "primary_pass_rate": passed_count / count if count else 0,
+        "primary_passed": passed_count,
+        "primary_failed": count - passed_count,
+    }
+    result = {
+        "path": str((root / path).relative_to(root) if not path.is_absolute() else path),
+        "summary": summary,
+        "episodes": reports,
+    }
+    return result, count > 0 and passed_count == count

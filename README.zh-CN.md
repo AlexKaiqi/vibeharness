@@ -38,7 +38,8 @@ vh init /path/to/target/repo
 ```
 
 详见：[安装](docs/installation.zh-CN.md) 和
-[Runtime 安装矩阵](docs/runtime_install.zh-CN.md)。验证细节见
+[Runtime 安装矩阵](docs/runtime_install.zh-CN.md)。Codex 用户也可以看
+[Codex 安装](docs/codex_install.zh-CN.md)。验证细节见
 [验证](docs/verification.zh-CN.md)。
 
 ## Runtime Setup
@@ -81,6 +82,7 @@ skill install。
 - `docs/licensing.md` / [中文](docs/licensing.zh-CN.md)：license 选择、署名期待和复用边界。
 - `docs/installation.md` / [中文](docs/installation.zh-CN.md)：本地 package 使用、editable development install 和 `vh init`。
 - `docs/runtime_install.md` / [中文](docs/runtime_install.zh-CN.md)：Codex、Claude Code、Cursor、OpenHands 和自定义 skills 目录安装方式。
+- `docs/codex_install.md` / [中文](docs/codex_install.zh-CN.md)：Codex-specific artifact mapping 和验证方式。
 - `CONTRIBUTING.md`、`SECURITY.md`、`.github/`：社区和贡献文件。
 - `CHANGELOG.md` / [中文](CHANGELOG.zh-CN.md)：当前 release notes 和 known limits。
 - `benchmark/` / [中文](benchmark/README.zh-CN.md)：VibeHarnessBench 的任务格式、指标和 seed task。

@@ -13,6 +13,8 @@ VibeHarness 分成两层：
 
 ## Codex
 
+Codex 详细说明见：[Codex 安装](codex_install.zh-CN.md)。
+
 安装 skill：
 
 ```sh

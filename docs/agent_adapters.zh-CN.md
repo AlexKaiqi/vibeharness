@@ -5,6 +5,7 @@
 VibeHarness 通过使用各工具原生的 instruction/config surface 来保持可移植性，而不是构建特定厂商 wrapper。
 
 各 runtime 面向用户的安装命令见：[Runtime 安装矩阵](runtime_install.zh-CN.md)。
+Codex-specific artifact mapping 见：[Codex 安装](codex_install.zh-CN.md)。
 
 ## Codex
 

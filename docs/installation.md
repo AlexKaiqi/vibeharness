@@ -9,6 +9,8 @@ VibeHarness has two installation paths:
 
 For runtime-specific setup, see
 [Runtime Install Matrix](runtime_install.md).
+For Codex-specific artifacts and verification, see
+[Codex Install](codex_install.md).
 
 ## Skill Install
 

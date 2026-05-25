@@ -8,6 +8,7 @@ VibeHarness 有两条安装路径：
 2. 可选的 Python CLI 安装，用于 episode scaffolding、scoring 和 reports。
 
 不同 runtime 的具体安装方式见：[Runtime 安装矩阵](runtime_install.zh-CN.md)。
+Codex-specific artifacts 和验证方式见：[Codex 安装](codex_install.zh-CN.md)。
 
 ## Skill Install
 

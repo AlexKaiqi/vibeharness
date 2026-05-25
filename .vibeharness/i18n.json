@@ -99,6 +99,14 @@
       "notes": "Runtime-specific installation matrix."
     },
     {
+      "source": "docs/codex_install.md",
+      "locale": "zh-CN",
+      "target": "docs/codex_install.zh-CN.md",
+      "status": "current",
+      "reviewed_at": "2026-05-25",
+      "notes": "Codex-specific artifact mapping and verification."
+    },
+    {
       "source": "docs/episode_collection.md",
       "locale": "zh-CN",
       "target": "docs/episode_collection.zh-CN.md",

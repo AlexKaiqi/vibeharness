@@ -13,6 +13,8 @@ All notable changes to VibeHarness are documented here.
   install the workflow without installing the Python package.
 - Runtime-specific installation documentation now covers Codex, Claude Code,
   Cursor, OpenHands, and custom skill directories.
+- Codex-specific installation documentation now makes the skill and `AGENTS.md`
+  artifacts explicit and includes verification commands.
 
 ### Validation
 

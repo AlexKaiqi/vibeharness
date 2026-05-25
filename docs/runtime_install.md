@@ -13,6 +13,8 @@ each project that should keep replayable episodes.
 
 ## Codex
 
+Detailed Codex notes: [Codex Install](codex_install.md).
+
 Install the skill:
 
 ```sh

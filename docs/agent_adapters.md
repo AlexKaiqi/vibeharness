@@ -7,6 +7,7 @@ surface instead of building a vendor-specific wrapper.
 
 For user-facing installation commands by runtime, see
 [Runtime Install Matrix](runtime_install.md).
+For Codex-specific artifact mapping, see [Codex Install](codex_install.md).
 
 ## Codex
 

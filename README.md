@@ -48,6 +48,7 @@ vh init /path/to/target/repo
 
 See [Installation](docs/installation.md) and
 [Runtime Install Matrix](docs/runtime_install.md) for runtime-specific setup.
+Codex users can also read [Codex Install](docs/codex_install.md).
 See [Verification](docs/verification.md) for validation details.
 
 ## Runtime Setup
@@ -101,6 +102,7 @@ This repository contains:
   and `vh init`.
 - `docs/runtime_install.md`: Codex, Claude Code, Cursor, OpenHands, and custom
   skill-directory setup.
+- `docs/codex_install.md`: Codex-specific artifact mapping and verification.
 - `CONTRIBUTING.md`, `SECURITY.md`, `.github/`: community and contribution
   files.
 - `CHANGELOG.md`: current release notes and known limits.

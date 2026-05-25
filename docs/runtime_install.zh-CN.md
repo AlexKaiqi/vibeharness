@@ -27,6 +27,7 @@ cd vibeharness
 
 ```text
 ${CODEX_HOME:-$HOME/.codex}/skills/vibeharness
+${AGENTS_HOME:-$HOME/.agents}/skills/vibeharness
 ```
 
 在 Codex 中显式调用：
@@ -43,8 +44,8 @@ cd /path/to/project
 vh init .
 ```
 
-这会写入 `AGENTS.md` 和 `.vibeharness/`，让 Codex 能读取仓库级指令，并用
-`vh start` 创建 episode。
+这会写入 `AGENTS.md`、`.agents/skills/vibeharness/` 和 `.vibeharness/`，让
+Codex 能读取仓库级指令、发现 repo-scoped skill，并用 `vh start` 创建 episode。
 
 ## Claude Code
 

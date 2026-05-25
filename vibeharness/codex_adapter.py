@@ -83,11 +83,14 @@ def check_codex_adapter(root: Path) -> Tuple[List[str], int]:
             return errors, checks
 
         target_agents = target / "AGENTS.md"
-        checks += 2
+        target_skill = target / ".agents" / "skills" / "vibeharness" / "SKILL.md"
+        checks += 3
         if not target_agents.exists():
             errors.append("Codex adapter smoke target missing AGENTS.md")
         elif "scripts/vh_" in target_agents.read_text(encoding="utf-8"):
             errors.append("Codex adapter smoke target AGENTS.md still references repository-local scripts")
+        if not target_skill.exists():
+            errors.append("Codex adapter smoke target missing repo-scoped skill")
 
         start = _run_cli(root, target, ["start", "--request", "codex adapter smoke"])
         checks += 1

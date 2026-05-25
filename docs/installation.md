@@ -50,7 +50,8 @@ root `SKILL.md` is kept in sync for tools that expect a top-level skill entry.
 Runtime notes:
 
 - Codex: use `./install.sh --codex-only` for the local skill, and `vh init` in
-  each project that should carry `AGENTS.md` and `.vibeharness/`.
+  each project that should carry `AGENTS.md`, `.agents/skills/vibeharness/`,
+  and `.vibeharness/`.
 - Claude Code: use `./install.sh --claude-only` for the local skill, and
   `vh init` for `CLAUDE.md` plus `.claude/commands/`.
 - Cursor: prefer `vh init` for `.cursor/rules/vibeharness.mdc`; use
@@ -105,6 +106,7 @@ python3 -m vibeharness.cli init /path/to/target/repo
 This copies the portable VibeHarness runtime and agent adapter files:
 
 - `.vibeharness/`
+- `.agents/skills/vibeharness/`
 - `AGENTS.md`
 - `CLAUDE.md`
 - `.claude/commands/`

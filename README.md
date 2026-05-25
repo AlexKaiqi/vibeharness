@@ -77,6 +77,8 @@ This repository contains:
 
 - `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/`, `.claude/commands/`, and
   `.openhands/microagents/`: thin adapters for common coding agents.
+- `.agents/skills/vibeharness/`: the repo-scoped Codex skill artifact installed
+  by `vh init`.
 - `SKILL.md`, `skills/vibeharness/`, and `install.sh`: a skill-first
   distribution that can be installed into Codex, Claude Code, or a custom
   skills directory without installing the Python package.

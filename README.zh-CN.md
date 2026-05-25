@@ -67,6 +67,7 @@ skill install。
 本仓库包含：
 
 - `AGENTS.md`、`CLAUDE.md`、`.cursor/rules/`、`.claude/commands/`、`.openhands/microagents/`：面向常见 coding agent 的薄适配层。
+- `.agents/skills/vibeharness/`：由 `vh init` 写入的 repo-scoped Codex skill artifact。
 - `SKILL.md`、`skills/vibeharness/` 和 `install.sh`：skill-first 分发形式，可在不安装 Python package 的情况下安装到 Codex、Claude Code 或自定义 skills 目录。
 - `.vibeharness/`：可移植的运行时配置和 episode 模板。
 - `docs/landing_architecture.md` / [中文](docs/landing_architecture.zh-CN.md)：生产落地架构和运行模式。

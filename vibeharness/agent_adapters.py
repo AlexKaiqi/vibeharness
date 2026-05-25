@@ -11,7 +11,7 @@ from typing import Dict, Iterable, List, Tuple
 
 
 ADAPTER_FILES: Dict[str, List[str]] = {
-    "codex": ["AGENTS.md"],
+    "codex": ["AGENTS.md", ".agents/skills/vibeharness/SKILL.md"],
     "claude": [
         "CLAUDE.md",
         ".claude/commands/vh-start.md",
@@ -30,6 +30,12 @@ REQUIRED_PHRASES: Dict[str, List[str]] = {
         "When the User Intervenes",
         "decision_contract.md",
         "vh score <episode>",
+    ],
+    ".agents/skills/vibeharness/SKILL.md": [
+        "name: vibeharness",
+        "vh start --request",
+        "decision contract",
+        "vh score",
     ],
     "CLAUDE.md": [
         "vh start --request",

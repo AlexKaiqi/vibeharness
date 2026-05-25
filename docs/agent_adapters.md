@@ -20,8 +20,8 @@ off by default in cloud tasks, with allowlists available when needed.
 Install shape:
 
 - local skill: `./install.sh --codex-only`;
-- project runtime: `vh init /path/to/project`, which writes `AGENTS.md` and
-  `.vibeharness/`.
+- project runtime: `vh init /path/to/project`, which writes `AGENTS.md`,
+  `.agents/skills/vibeharness/`, and `.vibeharness/`.
 
 Useful sources:
 

@@ -11,7 +11,7 @@ Usage:
 
 Options:
   --force        Replace an existing vibeharness skill directory.
-  --codex-only   Install only to ${CODEX_HOME:-$HOME/.codex}/skills/vibeharness.
+  --codex-only   Install only to Codex skill locations.
   --claude-only  Install only to ${CLAUDE_HOME:-$HOME/.claude}/skills/vibeharness.
   --cursor-only  Install only to ${CURSOR_HOME:-$HOME/.cursor}/skills/vibeharness.
   --target DIR   Install to an explicit final skill directory.
@@ -97,17 +97,23 @@ install_skill() {
 
 : "${HOME:?HOME is required}"
 
+AGENTS_BASE="${AGENTS_HOME:-$HOME/.agents}"
 CODEX_BASE="${CODEX_HOME:-$HOME/.codex}"
 CLAUDE_BASE="${CLAUDE_HOME:-$HOME/.claude}"
 CURSOR_BASE="${CURSOR_HOME:-$HOME/.cursor}"
 
+install_codex_skill() {
+  install_skill "Codex repo/user" "$AGENTS_BASE/skills/vibeharness"
+  install_skill "Codex app compatibility" "$CODEX_BASE/skills/vibeharness"
+}
+
 case "$MODE" in
   both)
-    install_skill "Codex" "$CODEX_BASE/skills/vibeharness"
+    install_codex_skill
     install_skill "Claude" "$CLAUDE_BASE/skills/vibeharness"
     ;;
   codex)
-    install_skill "Codex" "$CODEX_BASE/skills/vibeharness"
+    install_codex_skill
     ;;
   claude)
     install_skill "Claude" "$CLAUDE_BASE/skills/vibeharness"

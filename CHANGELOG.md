@@ -15,6 +15,8 @@ All notable changes to VibeHarness are documented here.
   Cursor, OpenHands, and custom skill directories.
 - Codex-specific installation documentation now makes the skill and `AGENTS.md`
   artifacts explicit and includes verification commands.
+- Codex project initialization now includes the repo-scoped
+  `.agents/skills/vibeharness/` skill artifact.
 
 ### Validation
 

@@ -27,6 +27,7 @@ This writes:
 
 ```text
 ${CODEX_HOME:-$HOME/.codex}/skills/vibeharness
+${AGENTS_HOME:-$HOME/.agents}/skills/vibeharness
 ```
 
 Invoke it explicitly in Codex:
@@ -43,8 +44,9 @@ cd /path/to/project
 vh init .
 ```
 
-This writes `AGENTS.md` and `.vibeharness/` so Codex can read the repository
-instructions and create episodes with `vh start`.
+This writes `AGENTS.md`, `.agents/skills/vibeharness/`, and `.vibeharness/` so
+Codex can read the repository instructions, discover the repo-scoped skill, and
+create episodes with `vh start`.
 
 ## Claude Code
 

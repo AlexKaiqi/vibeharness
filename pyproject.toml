@@ -39,6 +39,9 @@ packages = ["vibeharness"]
 vibeharness = [
   "assets/AGENTS.md",
   "assets/CLAUDE.md",
+  "assets/.agents/skills/vibeharness/*.md",
+  "assets/.agents/skills/vibeharness/agents/*.yaml",
+  "assets/.agents/skills/vibeharness/references/*.md",
   "assets/.vibeharness/*.json",
   "assets/.vibeharness/*.md",
   "assets/.vibeharness/templates/*.json",

@@ -10,6 +10,7 @@ INIT_PATHS = [
     ".vibeharness/README.md",
     ".vibeharness/config.json",
     ".vibeharness/templates",
+    ".agents/skills/vibeharness",
     "AGENTS.md",
     "CLAUDE.md",
     ".claude/commands",

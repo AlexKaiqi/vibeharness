@@ -2,15 +2,17 @@
 
 [English](codex_install.md) | 简体中文
 
-VibeHarness 通过两类 artifact 支持 Codex：
+VibeHarness 通过三类 artifact 支持 Codex：
 
 | 用途 | 仓库中的 artifact | 安装后位置 |
 | --- | --- | --- |
-| 全局 Codex skill | `skills/vibeharness/` | `${CODEX_HOME:-$HOME/.codex}/skills/vibeharness` |
+| repo-scoped Codex skill | `.agents/skills/vibeharness/` | `vh init` 后的 `/path/to/project/.agents/skills/vibeharness` |
+| user Codex skill | `skills/vibeharness/` | `${AGENTS_HOME:-$HOME/.agents}/skills/vibeharness` |
+| Codex app compatibility skill | `skills/vibeharness/` | `${CODEX_HOME:-$HOME/.codex}/skills/vibeharness` |
 | 项目级指令 | `AGENTS.md` | `vh init` 后的 `/path/to/project/AGENTS.md` |
 
-仓库里不会直接提交 `.codex/` 目录。`install.sh` 会在用户本机的 Codex home
-中创建 Codex skill 目录。
+仓库里不会直接提交 `.codex/` 目录。当前 Codex 文档描述的 repo-scoped skills
+路径是 `.agents/skills`，而 `AGENTS.md` 仍然是项目级 instruction file。
 
 ## 安装 Codex Skill
 
@@ -23,9 +25,11 @@ cd vibeharness
 验证安装后的 artifact：
 
 ```sh
+test -f "${AGENTS_HOME:-$HOME/.agents}/skills/vibeharness/SKILL.md"
 test -f "${CODEX_HOME:-$HOME/.codex}/skills/vibeharness/SKILL.md"
 test -f "${CODEX_HOME:-$HOME/.codex}/skills/vibeharness/agents/openai.yaml"
 test -f "${CODEX_HOME:-$HOME/.codex}/skills/vibeharness/references/episode-format.md"
+diff -qr skills/vibeharness "${AGENTS_HOME:-$HOME/.agents}/skills/vibeharness"
 diff -qr skills/vibeharness "${CODEX_HOME:-$HOME/.codex}/skills/vibeharness"
 ```
 
@@ -56,9 +60,11 @@ vh init .
 
 ```text
 AGENTS.md
+.agents/skills/vibeharness/
 .vibeharness/
 ```
 
+`.agents/skills/vibeharness/` 给 Codex 提供 repo-scoped `$vibeharness` skill。
 `AGENTS.md` 会告诉 Codex 使用 `vh start --request ...` 创建 episode，记录
 interventions，写 decision contracts，在需要时从 checkpoint replay，并使用
 `vh score` 给 episode 评分。

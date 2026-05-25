@@ -13,6 +13,7 @@
 - 新增 runtime-specific 安装文档，覆盖 Codex、Claude Code、Cursor、
   OpenHands 和自定义 skill 目录。
 - 新增 Codex-specific 安装文档，明确 skill 与 `AGENTS.md` artifacts，并提供验证命令。
+- Codex 项目初始化现在包含 repo-scoped `.agents/skills/vibeharness/` skill artifact。
 
 ### Validation
 

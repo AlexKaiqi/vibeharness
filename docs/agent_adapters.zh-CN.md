@@ -14,7 +14,7 @@ Codex-specific artifact mapping 见：[Codex 安装](codex_install.zh-CN.md)。
 Install shape：
 
 - local skill：`./install.sh --codex-only`；
-- project runtime：`vh init /path/to/project`，写入 `AGENTS.md` 和 `.vibeharness/`。
+- project runtime：`vh init /path/to/project`，写入 `AGENTS.md`、`.agents/skills/vibeharness/` 和 `.vibeharness/`。
 
 Useful sources:
 

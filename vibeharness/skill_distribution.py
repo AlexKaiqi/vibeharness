@@ -41,13 +41,15 @@ def check_skill_distribution(root: Path) -> Tuple[List[str], int]:
     errors: List[str] = []
     checks = 0
     skill_dir = root / "skills" / "vibeharness"
+    repo_skill_dir = root / ".agents" / "skills" / "vibeharness"
     skill_md = skill_dir / "SKILL.md"
+    repo_skill_md = repo_skill_dir / "SKILL.md"
     root_skill_md = root / "SKILL.md"
     reference = skill_dir / "references" / "episode-format.md"
     openai_yaml = skill_dir / "agents" / "openai.yaml"
     installer = root / "install.sh"
 
-    for required in [skill_md, root_skill_md, reference, openai_yaml, installer]:
+    for required in [skill_md, repo_skill_md, root_skill_md, reference, openai_yaml, installer]:
         checks += 1
         if not required.exists():
             errors.append(f"{required.relative_to(root)}: missing")
@@ -64,6 +66,17 @@ def check_skill_distribution(root: Path) -> Tuple[List[str], int]:
         checks += 1
         if root_skill_md.read_text(encoding="utf-8") != skill_md.read_text(encoding="utf-8"):
             errors.append("SKILL.md and skills/vibeharness/SKILL.md are out of sync")
+
+    if repo_skill_dir.exists() and skill_dir.exists():
+        checks += 1
+        completed = subprocess.run(
+            ["diff", "-qr", str(skill_dir), str(repo_skill_dir)],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        if completed.returncode != 0:
+            errors.append(".agents/skills/vibeharness and skills/vibeharness are out of sync")
 
     if skill_dir.exists():
         for name in sorted(DISALLOWED_SKILL_DOCS):
@@ -82,6 +95,7 @@ def check_skill_distribution(root: Path) -> Tuple[List[str], int]:
             tmp_path = Path(tmp)
             env = os.environ.copy()
             env["HOME"] = str(tmp_path / "home")
+            env["AGENTS_HOME"] = str(tmp_path / "agents")
             env["CODEX_HOME"] = str(tmp_path / "codex")
             completed = subprocess.run(
                 ["bash", str(installer), "--force"],
@@ -96,10 +110,13 @@ def check_skill_distribution(root: Path) -> Tuple[List[str], int]:
                     "install.sh smoke test failed: "
                     + (completed.stderr.strip() or completed.stdout.strip())
                 )
-            codex_skill = tmp_path / "codex" / "skills" / "vibeharness" / "SKILL.md"
+            codex_standard_skill = tmp_path / "agents" / "skills" / "vibeharness" / "SKILL.md"
+            codex_compat_skill = tmp_path / "codex" / "skills" / "vibeharness" / "SKILL.md"
             claude_skill = tmp_path / "home" / ".claude" / "skills" / "vibeharness" / "SKILL.md"
-            if not codex_skill.exists():
-                errors.append("install.sh smoke test did not install Codex skill")
+            if not codex_standard_skill.exists():
+                errors.append("install.sh smoke test did not install Codex standard skill")
+            if not codex_compat_skill.exists():
+                errors.append("install.sh smoke test did not install Codex compatibility skill")
             if not claude_skill.exists():
                 errors.append("install.sh smoke test did not install Claude skill")
 
